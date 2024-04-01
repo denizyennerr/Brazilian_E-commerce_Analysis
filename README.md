@@ -91,7 +91,6 @@ GROUP BY approved_month
 ORDER BY approved_month;
 
 #We can now see the distribution of orders on a monthly basis.
-![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/092577b4-33b1-4ca0-9e8c-f34e069de0cc)
 
 and how do monthly order counts vary across the years from 2016 to 2018?
 
