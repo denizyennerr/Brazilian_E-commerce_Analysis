@@ -92,7 +92,7 @@ FROM ORDERS
 GROUP BY approved_month
 ORDER BY approved_month;
 
-monthly_order.png
+![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
 
 
 #We can now see the distribution of orders on a monthly basis.
