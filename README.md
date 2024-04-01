@@ -73,16 +73,16 @@ As can be depicted from the schema, the database contains seven eight tables. Th
 ### Data Analysis
 ```SQL
 SELECT * from orders limit 10;
--- viewing the first 10 orders of the dataset. 
--- The Customer Table, found in the olist_customers_dataset, includes the following columns:
+# viewing the first 10 orders of the dataset. 
+# The Customer Table, found in the olist_customers_dataset, includes the following columns:
 
-- customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
-- customer_unique_id: provides a unique identifier for each customer.
+# customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
+# customer_unique_id: provides a unique identifier for each customer.
 In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
 
-- customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
-- customer_city: indicates the name of the customer's city.
-- customer_state: specifies the customer's state.
+# customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
+# customer_city: indicates the name of the customer's city.
+# customer_state: specifies the customer's state.
 
 SELECT count(order_id),
 	EXTRACT(MONTH from order_approved_at) AS approved_month
