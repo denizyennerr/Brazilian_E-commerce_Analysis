@@ -37,7 +37,9 @@ In the initial data preparation phase, the following tasks were performed:
 
 
 ### Database Schema (ERD)
+
 [Download Here](ERD.pgerd.png)
+
 As can be depicted from the schema, the database contains seven eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
 
@@ -90,6 +92,9 @@ FROM ORDERS
 GROUP BY approved_month
 ORDER BY approved_month;
 
+monthly_order.png
+
+
 #We can now see the distribution of orders on a monthly basis.
 monthly_order.png
 and how do monthly order counts vary across the years from 2016 to 2018?
@@ -98,7 +103,6 @@ and how do monthly order counts vary across the years from 2016 to 2018?
 ```
 
 ### Results/Findings
-monthly_order.png
 
 The query results are summarised as follows:
 1. Users who opt for more installments during payment primarily reside in São Paulo (SP), followed by Rio de Janeiro (RJ), Minas Gerais (MG), and Paraná (PR). 
