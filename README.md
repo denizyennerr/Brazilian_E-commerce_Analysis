@@ -36,18 +36,38 @@ In the initial data preparation phase, the following tasks were performed:
 2. Handling missing values.
 3. Data cleaning and formatting.
 
+
+### Database Schema (ERD)
+
+
 ### EDA( Exploratory Data Analysis)
 
-EDA involved exploring the Olist dataset to answer key questions, such as:
+# EDA involved exploring the Olist dataset to answer key questions for order analysis are as such:
 
-- Examining the distribution of orders on monthly and monthly orders over the years between 2016 to 2018.
-- After examining the number of orders broken down by order status monthly, are there any months with dramatic decreases or increases?
-- 
+- What does the distribution of orders look like on a monthly basis, and how do monthly order counts vary across the years from 2016 to 2018?
+- How have the order statuses "unavailable" and "canceled" varied over the years 2016-2018?
+- How have the order status "delivered" varied over the years 2016-2018?
+- After examining the order counts broken down by product category. Which categories stand out during special occasions such as Valentine's Day?
+- What is the distribution of order counts based on both the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.)? Additionally, how do these patterns differ across different days of the week and dates within a month?
+
+  
+# EDA involved exploring the Olist dataset to answer key questions for customer analysis is as such:
+
+- Which cities have customers who make the most purchases? Determine the city where each customer places the highest number of orders and conduct the analysis accordingly.
 
 
-- How have the order statuses (e.g., delivered, shipped, canceled) varied over the years 2016-2018?
-- In which regions do users who have more installments for payment primarily live?
+# EDA involved exploring the Olist dataset to answer key questions for seller analysis are as such:
+
+- Who are the top 5 sellers that deliver orders to customers most efficiently? Bring the top 5 sellers who deliver orders to customers most efficiently? Analyze and interpret their order counts along with the reviews and ratings of their products.
 - Which sellers sell products across a wider range of categories? Do sellers with a wider range of categories also have higher order counts?
+
+# EDA involved exploring the Olist dataset to answer key questions for payment analysis are as such:
+
+- In which regions do users who have more installments for payment primarily live?
+- What is the breakdown of successful orders and total successful payment amounts based on payment methods?
+- What is the distribution of orders based on payment method, specifically comparing single payments versus installments across different product categories? Which categories are most frequently paid for in installments?
+
+
 
 ### Data Analysis
 
