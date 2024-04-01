@@ -98,6 +98,7 @@ and how do monthly order counts vary across the years from 2016 to 2018?
 ```
 
 ### Results/Findings
+monthly_order.png
 
 The query results are summarised as follows:
 1. Users who opt for more installments during payment primarily reside in São Paulo (SP), followed by Rio de Janeiro (RJ), Minas Gerais (MG), and Paraná (PR). 
