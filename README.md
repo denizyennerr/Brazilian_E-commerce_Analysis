@@ -246,6 +246,8 @@ plt.tight_layout()
 plt.show()
 ```
 
+![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
+
 
 
 
