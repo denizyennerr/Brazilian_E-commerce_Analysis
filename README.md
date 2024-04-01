@@ -13,6 +13,7 @@
 - [Limitations](#limitations)
 - [References](#references)
 
+
 ### Project Overview: 
 
 This data analysis project explores a public dataset of e-commerce orders from Olist. Olist is a prominent online e-commerce platform connecting merchants to the main marketplaces of Brazil. The dataset comprises 100,000 orders between 2016 and 2018, offering valuable information on various aspects of the customer journey, including order status, pricing, payment, and customer reviews.
@@ -20,7 +21,6 @@ This data analysis project explores a public dataset of e-commerce orders from O
 Presented by Olist, this dataset underscores the platform's success in streamlining e-commerce operations for merchants across Brazilian marketplaces. Olist facilitates seamless connections between merchants and consumers through innovative solutions, fostering a unified and efficient e-commerce ecosystem.
 
 This analysis will delve deeper into understanding the customer journey, comparing seller orders and their delivery times, and analyzing payment methods and payment installment patterns across different regions. Lastly, it will conduct an RFM (Recency, Frequency, Monetary) analysis, and thanks to this segmentation it will reveal the loyal customers and potential retention customers. By unlocking the power of Brazilian e-commerce through data-driven insights, one can reach important findings that can contribute to strategic decision-making and drive further growth in the e-commerce landscape.
-
 
 ### Tools
 
@@ -37,6 +37,8 @@ In the initial data preparation phase, the following tasks were performed:
 
 
 ### Database Schema (ERD)
+[Download Here](ERD.pgerd.png)
+As can be depicted from the schema, the database contains seven eight tables. These tables are olist_orders, olist_sellers, order_items, order_reviews, order_payments, olist_orders, olist_products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
 
 ### EDA( Exploratory Data Analysis)
@@ -69,17 +71,24 @@ In the initial data preparation phase, the following tasks were performed:
 
 
 ### Data Analysis
-
-
 ```SQL
-SELECT C(ORDER_ID),
-	EXTRACT(MONTH FROM ORDER_APPROVED_AT) AS APPROVED_MONTH,
-	EXTRACT(YEAR FROM ORDER_APPROVED_AT)AS APPROVED_YEAR
+SELECT * from orders limit 10;
+-- viewing the first 10 orders of the dataset. 
+-- The Customer Table, found in the olist_customers_dataset, includes the following columns:
+
+- customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
+- customer_unique_id: provides a unique identifier for each customer.
+In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
+
+- customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
+- customer_city: indicates the name of the customer's city.
+- customer_state: specifies the customer's state.
+
+SELECT count(order_id),
+	EXTRACT(MONTH from order_approved_at) AS approved_month
 FROM ORDERS
-GROUP BY APPROVED_MONTH,
-	APPROVED_YEAR
-ORDER BY APPROVED_MONTH,
-	APPROVED_YEAR;
+GROUP BY approved_month
+ORDER BY approved_month;
 ```
 
 ### Results/Findings
