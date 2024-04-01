@@ -97,18 +97,21 @@ ORDER BY approved_month;
 - With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
 
 ``` Python
+
+# We first start with importing the relevant libraries.
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
-# We first start with importing the relevant libraries.
+# Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
 
 monthly_order_data= pd.read_csv(r"C:\Users\ASUS\Desktop\monthly_order.csv")
 monthly_order_data.dropna(inplace=True)
 monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
 
-# Then we import our CSV file to our Jupyter Notebook. At last, we use the barplot() function to visualize the distribution of orders across different months.
+#At last, we use the barplot() function to visualize the distribution of orders across different months.
 
 plt.figure(figsize=(15, 8))
 sns.barplot(x='approved_month', y='count', data=monthly_order_data.astype(int), palette=['brown'], linewidth=2, ci=None)
@@ -123,18 +126,30 @@ plt.show()
 
 
  ``` SQL
+#Although we did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders. 
+
 Select count(order_id), order_status,
 		extract(month from order_approved_at) as approved_month
 from orders
 group by order_status, approved_month
 order by order_status desc, approved_month desc;
 
-#Although we did not filter explicitly for the order_status by using SQL, we can still reach the order status friction of the monthly orders. 
-```
 ```
 
 
+``` Python
+# We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will again use a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
 
+unavailable_or_cancelled_orders = order_status_distribution[(order_status_distribution['order_status'] == 'unavailable') | (order_status_distribution['order_status'] == 'cancelled')]
+
+plt.figure(figsize=(12, 6))
+plt.bar(unavailable_or_cancelled_orders['approved_month'], unavailable_or_cancelled_orders['count'], color='brown', linewidth=3)
+plt.title('Monthly Friction of Unavailable or Cancelled Orders')
+plt.xlabel('Approved Month')
+plt.ylabel('Frequency')
+plt.xticks(rotation=45, fontsize=10)
+plt.tight_layout()
+plt.show()
 
 ```
 
