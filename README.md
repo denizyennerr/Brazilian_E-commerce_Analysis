@@ -75,7 +75,7 @@ As can be depicted from the schema, the database contains seven eight tables. Th
 ### Data Analysis
 ```SQL
 SELECT * from orders limit 10;
-# To start off, we view the first 10 orders of the dataset.
+# To start, we view the first 10 orders of the dataset.
 
 # The Customer Table, found in the customers_dataset, includes the following columns:
 # customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
@@ -92,18 +92,15 @@ FROM ORDERS
 GROUP BY approved_month
 ORDER BY approved_month;
 
-![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
-
-
 #We can now see the distribution of orders on a monthly basis.
-monthly_order.png
+```
+![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
 and how do monthly order counts vary across the years from 2016 to 2018?
 
 
-```
+
 
 ### Results/Findings
-
 The query results are summarised as follows:
 1. Users who opt for more installments during payment primarily reside in São Paulo (SP), followed by Rio de Janeiro (RJ), Minas Gerais (MG), and Paraná (PR). 
 2. The number of users choosing more installments decreases gradually in these regions. 
