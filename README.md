@@ -97,6 +97,19 @@ ORDER BY approved_month;
 ###- With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
 
 ``` Python
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from matplotlib import pyplot as plt
+
+# We first start with importing the relevant libraries.
+
+monthly_order_data= pd.read_csv(r"C:\Users\ASUS\Desktop\monthly_order.csv")
+monthly_order_data.dropna(inplace=True)
+monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
+
+# Then we import our CSV file to our Jupyter Notebook. At last, we use the barplot() function to visualize the distribution of orders across different months.
+
 plt.figure(figsize=(15, 8))
 sns.barplot(x='approved_month', y='count', data=monthly_order_data.astype(int), palette=['brown'], linewidth=2, ci=None)
 plt.title('Monthly Orders Over Time', color='white')
@@ -110,14 +123,28 @@ plt.show()
 
 
  ``` SQL
-order statuses "unavailable" and "canceled" varied over the years 2016-2018
+Select count(order_id), order_status,
+		extract(month from order_approved_at) as approved_month
+from orders
+group by order_status, approved_month
+order by order_status desc, approved_month desc;
 
-
+#Although we did not filter explicitly for the order_status by using SQL, we can still reach the order status friction of the monthly orders. 
+```
+```
 
 
 
 
 ```
+
+![order_satus_cancelled](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/327d8e38-e156-4c92-9754-e98586c7c22f)
+
+
+
+
+
+
 
 ### Results/Findings
 The query results are summarised as follows:
