@@ -153,7 +153,39 @@ plt.show()
 
 ```
 
-![order_satus_cancelled](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/327d8e38-e156-4c92-9754-e98586c7c22f)
+
+
+``` Python
+#We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
+
+delivered_orders= order_status_distribution[order_status_distribution['order_status'] == 'delivered']
+
+plt.figure(figsize=(12, 6))
+sns.barplot(x='approved_month', y='count', data=delivered_orders, color='green', ci=None)
+plt.title('Monthly Friction of Delivered Orders')
+plt.xlabel('Months')
+plt.ylabel('Number of Orders')
+plt.xticks(fontsize=10)
+plt.yticks(fontsize=10)
+plt.tight_layout()
+plt.show()
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
