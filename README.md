@@ -142,6 +142,10 @@ order by order_status desc, approved_month desc;
 
 unavailable_or_cancelled_orders = order_status_distribution[(order_status_distribution['order_status'] == 'unavailable') | (order_status_distribution['order_status'] == 'cancelled')]
 
+
+![undelivered_cancelled_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/082592e6-6e94-49af-b0a3-d1e3d0946fd8)
+
+
 plt.figure(figsize=(12, 6))
 plt.bar(unavailable_or_cancelled_orders['approved_month'], unavailable_or_cancelled_orders['count'], color='brown', linewidth=3)
 plt.title('Monthly Friction of Unavailable or Cancelled Orders')
@@ -152,6 +156,7 @@ plt.tight_layout()
 plt.show()
 
 ```
+
 
 
 
@@ -172,6 +177,7 @@ plt.show()
 
 ```
 
+![order_satus_delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1f4f1003-91f9-4977-86c4-12727f07f442)
 
 
 
