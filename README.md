@@ -38,7 +38,7 @@ In the initial data preparation phase, the following tasks were performed:
 
 ### Database Schema (ERD)
 [Download Here](ERD.pgerd.png)
-As can be depicted from the schema, the database contains seven eight tables. These tables are olist_orders, olist_sellers, order_items, order_reviews, order_payments, olist_orders, olist_products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
+As can be depicted from the schema, the database contains seven eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
 
 ### EDA( Exploratory Data Analysis)
@@ -73,13 +73,13 @@ As can be depicted from the schema, the database contains seven eight tables. Th
 ### Data Analysis
 ```SQL
 SELECT * from orders limit 10;
-# viewing the first 10 orders of the dataset. 
-# The Customer Table, found in the olist_customers_dataset, includes the following columns:
+# To start off, we view the first 10 orders of the dataset.
 
+# The Customer Table, found in the customers_dataset, includes the following columns:
 # customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
 # customer_unique_id: provides a unique identifier for each customer.
-In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
 
+# In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
 # customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
 # customer_city: indicates the name of the customer's city.
 # customer_state: specifies the customer's state.
@@ -89,6 +89,13 @@ SELECT count(order_id),
 FROM ORDERS
 GROUP BY approved_month
 ORDER BY approved_month;
+
+#- We can now see the distribution of orders on a monthly basis.
+
+and how do monthly order counts vary across the years from 2016 to 2018?
+![image](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/e516b517-8205-4a52-b344-0bf8d69fc09b)
+
+
 ```
 
 ### Results/Findings
