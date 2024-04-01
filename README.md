@@ -15,14 +15,13 @@
 
 ### Project Overview
 
-This data analysis project aims to analyze a public dataset of e-commerce orders from the Olist Store. The dataset comprises information on 100,000 orders made between 2016 and 2018 across multiple marketplaces in Brazil. 
-It provides insights into various aspects of the orders, including order status, pricing, payment and freight performance, customer location, product attributes, and customer reviews.
+This data analysis project aims to analyze a public dataset of e-commerce orders from the Olist Store. Olist operates as an online e-commerce site for sellers, that connects merchants and their products to the main marketplaces of Brazil.
 
-### Data Sources
+The dataset comprises information on 100,000 orders made between 2016 and 2018 across multiple marketplaces in Brazil. It provides insights into various aspects of the orders, including order status, pricing, payment and freight performance, customer location, product attributes, and customer reviews. Additionally, a geolocation dataset linking Brazilian zip codes to latitude and longitude coordinates was incorporated but not used throughout the data analysis.
 
-Olist Store E-commerce Dataset: A public dataset provided by Olist contains information on 100,000 e-commerce orders made between 2016 and 2018 across multiple marketplaces in Brazil. 
+Presented by Olist,  an online e-commerce site for sellers in Brazilian marketplaces, this dataset indicates how Olist is succesful at connectting merchants and their products to the main marketplaces of Brazil.  Through Olist's innovative solutions, merchants can effortlessly navigate the complexities of ecommerce, seamlessly connecting with consumers and delivering seamless customer experiences, all under a unified contract.
 
-Brazilian Zip Code Geolocation Dataset: A supplementary dataset that relates Brazilian zip codes to latitude/longitude coordinates.
+We will delve deeper into the customer journey, compare sellers orders and delivery times, analyse payment orders of the customers per region and round up by RFM Analysis. We will unfold the power of Brazilian e-commerce via data analysis and share fruitful insights.
 
 
 ### Tools
@@ -91,6 +90,7 @@ I had to remove all zero values
 1. [PostgreSQL.org] (https://www.postgresql.org/docs/current/datatype-datetime.html)
 2. Olist Store Ecommerce Dataset. Retrieved from [https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce] 
 4. Brazilian Institute of Geography and Statistics (IBGE), (1972). Brazilian Zip Code Geolocation Dataset. Retrieved from [https://www.ibge.gov.br/en/]
+5. Pagan Research [https://paganresearch.io/company/olist]
 
    
 
