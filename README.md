@@ -47,7 +47,7 @@ As can be depicted from the schema, the database contains seven eight tables. Th
 
 ### EDA involved in exploring the Olist dataset to answer key questions for order analysis are as such:
 
-- What does the distribution of orders look like on a monthly basis, and how do monthly order counts vary across the years from 2016 to 2018?
+- What does the distribution of orders look like on a monthly basis?
 - How have the order statuses "unavailable" and "canceled" varied over the years 2016-2018?
 - How has the order status "delivered" varied over the years 2016-2018?
 - After examining the order counts broken down by product category. Which categories stand out during special occasions such as Valentine's Day?
@@ -98,10 +98,11 @@ ORDER BY approved_month;
 
 
 
-and how do monthly order counts vary across the years from 2016 to 2018?
+``` 
 
 
 
+```
 
 ### Results/Findings
 The query results are summarised as follows:
