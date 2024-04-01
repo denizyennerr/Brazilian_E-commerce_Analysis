@@ -248,10 +248,65 @@ plt.show()
 
 ![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
 
+``` SQL
+# Analyzing the number of orders based on the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
 
+Select count(order_id) as order_count,
+to_char(order_purchase_timestamp, 'Day') as approved_day
+from orders
+group by approved_day
+order by approved_day;
 
+# Examining the order counts by the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
 
+Select count(order_id) as order_count, 
+extract(day from order_purchase_timestamp) as days_of_the_month
+from orders
+group by approved_day, days_of_the_month
+order by approved_day , days_of_the_month 
+;
+```
+``` Python
 
+#After importing our CSV file into Jupyter Notebook, we can proceed with visualizing our data. Depending on the nature of our analysis, we will utilize various visualization libraries such as Matplotlib, Seaborn, or Plotly.
+
+days_order_count = pd.read_csv(r"C:\Users\ASUS\Desktop\days_order_count.csv")
+days_order_count
+
+# For this visualization, we used a pie chart to visualize the distribution of order counts by days of the week. 
+plt.figure(figsize=(10, 6))
+plt.pie(days_order_count['order_count'], labels=days_order_count['approved_day'], autopct='%1.1f%%', startangle=140)
+plt.title('Order Count by Days of the Week')
+plt.axis('equal')  
+plt.show()
+
+#Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
+
+days_of_the_month_order_count= pd.read_csv(r"C:\Users\ASUS\Desktop\days_of_the_month_ordercount.csv")
+
+days_of_the_month_order_count_cleaned= days_of_the_month_order_count.dropna()
+print(days_of_the_month_order_count_cleaned)
+
+#The bar plot displays the distribution of order count across different days of the month. Each bar represents the number of orders received on a specific day of the month. 
+From the visualization, we can observe some patterns:
+- There is some variation in the number of orders throughout the month, with certain days having higher order counts than others.
+- Some days show peaks in order counts, indicating periods of increased sales activity.
+- Other days exhibit lower order counts, suggesting quieter periods in terms of order placements.
+- Overall, there seems to be some variability in order volumes across different days of the month, which could be influenced by factors such as promotions, seasonality, or customer behavior. 
+
+Further analysis could be conducted to identify any underlying trends or patterns driving these fluctuations in order counts on different days of the month.
+
+plt.figure(figsize=(15, 8))
+sns.lineplot(x='days_of_the_month', y='order_count', data=days_of_the_month_order_count_cleaned, ci=None) 
+plt.title('Order Count by Days of the Month')
+plt.xlabel('Days of the Month ')
+plt.ylabel('Number of Orders')
+plt.show()
+
+```
+![pie](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c1331989-b400-4b79-aa99-e39c65a46dfa)
+
+![linechart](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/98ed5608-e7ab-4c63-9c5a-db88f8f58139)
 
 
 
