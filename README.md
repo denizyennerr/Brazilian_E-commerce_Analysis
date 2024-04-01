@@ -91,7 +91,7 @@ GROUP BY approved_month
 ORDER BY approved_month;
 
 #We can now see the distribution of orders on a monthly basis.
-
+monthly_order.png
 and how do monthly order counts vary across the years from 2016 to 2018?
 
 
