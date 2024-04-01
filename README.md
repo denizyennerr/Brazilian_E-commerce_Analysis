@@ -88,7 +88,7 @@ SELECT * from orders limit 10;
 
 SELECT count(order_id),
 	EXTRACT(MONTH from order_approved_at) AS approved_month
-FROM ORDERS
+FROM orders
 GROUP BY approved_month
 ORDER BY approved_month;
 
