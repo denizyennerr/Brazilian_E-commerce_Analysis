@@ -40,6 +40,11 @@ In the initial data preparation phase, the following tasks were performed:
 
 EDA involved exploring the Olist dataset to answer key questions, such as:
 
+- Examining the distribution of orders on monthly and monthly orders over the years between 2016 to 2018.
+- After examining the number of orders broken down by order status monthly, are there any months with dramatic decreases or increases?
+- 
+
+
 - How have the order statuses (e.g., delivered, shipped, canceled) varied over the years 2016-2018?
 - In which regions do users who have more installments for payment primarily live?
 - Which sellers sell products across a wider range of categories? Do sellers with a wider range of categories also have higher order counts?
@@ -49,24 +54,14 @@ EDA involved exploring the Olist dataset to answer key questions, such as:
 - In which regions do users who have more installments for payment primarily live?
 
 ```SQL
-With Data as (SELECT 
-	c.customer_state,
-	count( distinct o.order_id) as order_count,
-    AVG(p.payment_installments) AS average_payment_installments
-FROM 
-    customers c 
-JOIN 
-    orders o ON o.customer_id = c.customer_id
-JOIN 
-    order_payments p ON p.order_id = o.order_id
-Where p.payment_installments>12
-GROUP BY 
-    p.payment_installments,	c.customer_state
-Order by 2 desc)
-Select customer_state, 
-		count(order_count) from Data
-		group by 1
-		order by 2 desc;
+SELECT C(ORDER_ID),
+	EXTRACT(MONTH FROM ORDER_APPROVED_AT) AS APPROVED_MONTH,
+	EXTRACT(YEAR FROM ORDER_APPROVED_AT)AS APPROVED_YEAR
+FROM ORDERS
+GROUP BY APPROVED_MONTH,
+	APPROVED_YEAR
+ORDER BY APPROVED_MONTH,
+	APPROVED_YEAR;
 ```
 
 ### Results/Findings
