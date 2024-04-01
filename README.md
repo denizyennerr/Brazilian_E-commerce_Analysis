@@ -94,11 +94,26 @@ ORDER BY approved_month;
 
 #We can now see the distribution of orders on a monthly basis.
 ```
+# With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
+
+``` Python
+plt.figure(figsize=(15, 8))
+sns.barplot(x='approved_month', y='count', data=monthly_order_data.astype(int), palette=['brown'], linewidth=2, ci=None)
+plt.title('Monthly Orders Over Time', color='white')
+plt.xlabel('Months', color='white')
+plt.ylabel('Number of Orders', color='white')
+plt.show()
+
+```
+
 ![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
 
 
+ ``` SQL
+order statuses "unavailable" and "canceled" varied over the years 2016-2018
 
-``` 
+
+
 
 
 
