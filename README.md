@@ -13,15 +13,13 @@
 - [Limitations](#limitations)
 - [References](#references)
 
-### Project Overview
+### Project Overview: 
 
-This data analysis project aims to analyze a public dataset of e-commerce orders from the Olist Store. Olist operates as an online e-commerce site for sellers, that connects merchants and their products to the main marketplaces of Brazil.
+This data analysis project focuses on exploring a public dataset of e-commerce orders from Olist. Olist is a prominent online e-commerce platform connecting merchants to the main marketplaces of Brazil. The dataset comprises of 100,000 orders between 2016 and 2018, and it offers valuable information on various aspects of the customer journey, including order status, pricing, payment, and customer reviews.
 
-The dataset comprises information on 100,000 orders made between 2016 and 2018 across multiple marketplaces in Brazil. It provides insights into various aspects of the orders, including order status, pricing, payment and freight performance, customer location, product attributes, and customer reviews. Additionally, a geolocation dataset linking Brazilian zip codes to latitude and longitude coordinates was incorporated but not used throughout the data analysis.
+Presented by Olist, this dataset underscores the platform's success in streamlining e-commerce operations for merchants across Brazilian marketplaces. Through innovative solutions, Olist facilitates seamless connections between merchants and consumers, fostering a unified and efficient e-commerce ecosystem.
 
-Presented by Olist,  an online e-commerce site for sellers in Brazilian marketplaces, this dataset indicates how Olist is succesful at connectting merchants and their products to the main marketplaces of Brazil.  Through Olist's innovative solutions, merchants can effortlessly navigate the complexities of ecommerce, seamlessly connecting with consumers and delivering seamless customer experiences, all under a unified contract.
-
-We will delve deeper into the customer journey, compare sellers orders and delivery times, analyse payment orders of the customers per region and round up by RFM Analysis. We will unfold the power of Brazilian e-commerce via data analysis and share fruitful insights.
+This analysis will delve deeper into understanding the customer journey, comparing seller orders and their delivery times, and analyzing payment methods and payment installment patterns across different regions. Lastly, it will conduct an RFM (Recency, Frequency, Monetary) analysis, and thanks to this segmentation it will reveal the loyal customers and potential retention customers. By unlocking the power of Brazilian e-commerce through data-driven insights, one can reach important findings that can contribute to strategic decision-making and drive further growth in the e-commerce landscape.
 
 
 ### Tools
@@ -31,8 +29,7 @@ We will delve deeper into the customer journey, compare sellers orders and deliv
 - PostgreSQL- Data Analysis
 - Python- Data Visualisation
 
-
-#Data Cleaning/Preparation
+### Data Cleaning/Preparation
 
 In the initial data preparation phase, the following tasks were performed:
 1. Data Loading and inspection.
