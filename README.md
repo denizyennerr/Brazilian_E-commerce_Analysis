@@ -177,9 +177,9 @@ plt.show()
 ![order_satus_delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1f4f1003-91f9-4977-86c4-12727f07f442)
 
 
-- After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day. We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
-
-The Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:
+- After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day.
+  
+-- The Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:
 
 - order_id: A unique identifier for each order.
 - order_item_id: A sequential number indicating the position of an item within the order.
@@ -189,7 +189,7 @@ The Item Table, sourced from the "olist_order_items_dataset", consists of the fo
 - price: The price of the item.
 - freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
 
-The Product Table contains the following columns:
+-- The Product Table contains the following columns:
 
 - product_id: A unique identifier for each product.
 - product_category_head: The root category of the product, originally in Portuguese.
@@ -201,12 +201,14 @@ The Product Table contains the following columns:
 - product_height_cm: The height of the product measured in centimeters.
 - product_width_cm: The width of the product measured in centimeters.
 
-The Product Category Info Table contains the following columns:
+-- The Product Category Info Table contains the following columns:
 
 - product_category_name: The category name was originally in Portuguese.
 - product_name_english: The category name is translated into English.
   
 ``` SQL
+#We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
+
 SELECT 
     COUNT(o.order_id) AS order_count,
     t.product_category_name_english,
@@ -229,6 +231,8 @@ limit 15
 ;
 ```
 ``` Python
+#Once we import our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during the Valentine's Day shopping craze.
+
 product_category_valentines_day= pd.read_csv(r"C:\Users\ASUS\Desktop\product_category_valentines_day.csv")
 product_category_valentines_day
 
