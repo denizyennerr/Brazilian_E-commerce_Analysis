@@ -38,7 +38,7 @@ In the initial data preparation phase, the following tasks were performed:
 
 ### Database Schema (ERD)
 
-[Download Here](ERD.pgerd.png)
+"C:\Users\ASUS\Desktop\ERD.pgerd.png"
 
 As can be depicted from the schema, the database contains seven eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
