@@ -157,9 +157,6 @@ plt.show()
 
 ```
 
-
-
-
 ``` Python
 #We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
 
@@ -180,11 +177,70 @@ plt.show()
 ![order_satus_delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1f4f1003-91f9-4977-86c4-12727f07f442)
 
 
+- After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day. We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
 
+The Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:
 
+- order_id: A unique identifier for each order.
+- order_item_id: A sequential number indicating the position of an item within the order.
+- product_id: A unique identifier for each product.
+- seller_id: A unique identifier for each seller.
+- shipping_limit_date: The deadline set by the seller for handing over the order to the logistics partner.
+- price: The price of the item.
+- freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
 
+The Product Table contains the following columns:
 
+- product_id: A unique identifier for each product.
+- product_category_head: The root category of the product, originally in Portuguese.
+- product_name_length: The length of the product name in characters.
+- product_description_length: The length of the product description in characters.
+- product_photos_qty: The number of photos published for the product.
+- product_weight_g: The weight of the product measured in grams.
+- product_length_cm: The length of the product measured in centimeters.
+- product_height_cm: The height of the product measured in centimeters.
+- product_width_cm: The width of the product measured in centimeters.
 
+The Product Category Info Table contains the following columns:
+
+- product_category_name: The category name was originally in Portuguese.
+- product_name_english: The category name is translated into English.
+  
+``` SQL
+SELECT 
+    COUNT(o.order_id) AS order_count,
+    t.product_category_name_english,
+    DATE(o.order_approved_at) AS approved_date,
+    EXTRACT(YEAR FROM o.order_approved_at) AS approved_year 
+FROM 
+    orders AS o
+LEFT JOIN 
+   order_items AS b ON o.order_id = b.order_id
+LEFT JOIN 
+    products AS p ON b.product_id = p.product_id
+LEFT JOIN 
+    product_category_name_translation AS t ON p.product_category_name = t.product_category_name
+WHERE 
+    (EXTRACT(MONTH FROM o.order_approved_at) = 2 AND EXTRACT(DAY FROM o.order_approved_at) BETWEEN 1 AND 13)
+GROUP BY 
+    approved_date, approved_year, product_category_name_english
+ORDER BY  order_count desc
+limit 15
+;
+```
+``` Python
+product_category_valentines_day= pd.read_csv(r"C:\Users\ASUS\Desktop\product_category_valentines_day.csv")
+product_category_valentines_day
+
+plt.figure(figsize=(12, 8))
+sns.barplot(x='product_category_name_english', y='order_count' ,data=product_category_valentines_day, ci=None)
+plt.title('Product Distribution by Valentines Day')
+plt.xlabel('Category')
+plt.ylabel('Number of Products')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.show()
+```
 
 
 
