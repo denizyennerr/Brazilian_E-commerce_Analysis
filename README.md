@@ -38,7 +38,7 @@ In the initial data preparation phase, the following tasks were performed:
 
 ### Database Schema (ERD)
 
-"C:\Users\ASUS\Desktop\ERD.pgerd.png"
+![ERD pgerd](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a305011e-80b8-4e17-bcc7-a310872d9b06)
 
 As can be depicted from the schema, the database contains seven eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
