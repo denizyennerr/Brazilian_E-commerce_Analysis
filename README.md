@@ -188,7 +188,6 @@ With the help of Matplotlib alongside the Seaborn library, we employ the barplot
 We first start with importing the relevant libraries.
 
 ``` Python
-
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -198,7 +197,6 @@ from matplotlib import pyplot as plt
 Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
 
 ``` Python
-
 monthly_order_data= pd.read_csv(r"C:\Users\ASUS\Desktop\monthly_order.csv")
 monthly_order_data.dropna(inplace=True)
 monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
@@ -290,7 +288,6 @@ limit 15
 Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular for shopping before Valentine's Day.
 
 ``` Python
-
 product_category_valentines_day= pd.read_csv(r"C:\Users\ASUS\Desktop\product_category_valentines_day.csv")
 product_category_valentines_day
 
@@ -342,6 +339,7 @@ plt.title('Order Count by Days of the Week')
 plt.axis('equal')  
 plt.show()
 ```
+![pie](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c1331989-b400-4b79-aa99-e39c65a46dfa)
 
 Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
 
@@ -370,8 +368,6 @@ plt.ylabel('Number of Orders')
 plt.show()
 
 ```
-![pie](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c1331989-b400-4b79-aa99-e39c65a46dfa)
-
 ![linechart](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/98ed5608-e7ab-4c63-9c5a-db88f8f58139)
 
 Next, we will delve deeper into customer analysis by identifying the cities with the highest number of shoppers.
@@ -449,8 +445,125 @@ plt.ylabel('Order Count')
 ```	
 ![top_orders_per_city](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/33a1372a-a868-46a6-ad25-051bce25f928)
 
+With the following query, we will be able to identify sellers who have a track record of delivering orders quickly while maintaining satisfactory average review scores from customers.
+
+``` SQL
+WITH fastest_delivered_products AS (
+    SELECT 
+        oi.seller_id,
+        (o.order_delivered_customer_date - o.order_purchase_timestamp) AS delivery_time_days
+    FROM 
+        orders o
+    LEFT JOIN 
+        order_items oi ON oi.order_id = o.order_id
+)
+SELECT 
+    f.seller_id,
+    COUNT(DISTINCT oi.order_id) AS order_count,
+    AVG(f.delivery_time_days) AS avg_delivery_time,
+    AVG(rw.review_score) AS avg_review_score
+FROM 
+    fastest_delivered_products f
+JOIN 
+    order_items oi ON oi.seller_id = f.seller_id
+LEFT JOIN 
+    order_reviews rw ON rw.order_id = oi.order_id
+GROUP BY
+    f.seller_id
+HAVING 
+    AVG(f.delivery_time_days) IS NOT NULL 
+    AND COUNT(DISTINCT oi.order_id) > 15
+ORDER BY 
+    avg_delivery_time
+LIMIT 5;
+```
+We plot for the top 5 fastest delivery sellers by their order count.
+
+```Python
+fastest_delivery_sellers= pd.read_csv(r"C:\Users\ASUS\Desktop\fastest_delivery_sellers.csv")
+fastest_delivery_sellers
+
+plt.figure(figsize=(16, 7))
+sns.barplot(x='seller_id', y='order_count', data=fastest_delivery_sellers, palette='viridis', ci=None)
+plt.title('Top 5 Fastest Delivery Sellers by Order Count')
+plt.xlabel('Seller ID')
+plt.ylabel('Order Count')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+![fastest_sellers_by_ordercount](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/7c8a2965-3f1d-4e79-9426-c9e5b0861383)
 
 
+Now we will also plot the top 5 fastest delivery sellers by their average review scores.
+
+```Python
+top_sellers_by_review_score = fastest_delivery_sellers.sort_values(by='avg_review_score', ascending=False).head(5)
+
+plt.figure(figsize=(16, 7))
+sns.barplot(x='seller_id', y='avg_review_score', data=fastest_delivery_sellers, palette='viridis', ci=None)
+plt.title('Top 5 Fastest Delivery Sellers by Average Review Score')
+plt.xlabel('Seller ID')
+plt.ylabel('Average Review Score')
+plt.xticks(rotation=45)
+plt.show()
+```
+![average_review_score](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/4f0f993b-07c6-44ee-8ebf-8fac209854d2)
+
+
+Next, we will check the number of categories each seller sells their products in and their corresponding order counts. 
+
+```SQL
+WITH category_counts AS (
+    SELECT 
+        oi.seller_id,
+        COUNT(DISTINCT oi.order_id) AS order_counts,
+        COUNT(DISTINCT p.product_category_name) AS category_count
+    FROM 
+        order_items oi
+    LEFT JOIN 
+        sellers s ON s.seller_id = oi.seller_id
+    LEFT JOIN 
+        products p ON p.product_id = oi.product_id
+    GROUP BY 
+        oi.seller_id
+)
+SELECT 
+    cc.seller_id,
+    cc.order_counts,
+    cc.category_count
+FROM 
+    category_counts cc
+JOIN 
+    (
+        SELECT 
+            seller_id,
+            MAX(category_count) AS max_category
+        FROM 
+            category_counts
+        GROUP BY 
+            seller_id
+    ) AS max_categories ON cc.seller_id = max_categories.seller_id 
+                         AND cc.category_count = max_categories.max_category
+ORDER BY 
+		cc.category_count desc
+LIMIT 10;
+
+```
+The graph indicates that there is no observable correlation between the number of product categories offered by a seller and the quantity of orders they receive.
+
+```Python
+category_counts_sellers= pd.read_csv(r"C:\Users\ASUS\Desktop\category_counts_sellers.csv")
+category_counts_sellers
+
+plt.figure(figsize=(15,8))
+sns.barplot(x='category_count', y='order_counts', data=category_counts_sellers, palette=('GnBu_d'), ci=None)
+plt.title('Maximum Category Wise Product Sellers')
+plt.xlabel('Number of Category')
+plt.ylabel('Number of Products')
+```
+
+![category_count_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/365599ff-eb4b-45b5-893a-ee04b991df5f)
 
 
 
