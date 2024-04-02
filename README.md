@@ -407,8 +407,8 @@ The query results are summarised as follows:
 2. Olist Store Ecommerce Dataset. Retrieved from [https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce] 
 4. Brazilian Institute of Geography and Statistics (IBGE), (1972). Brazilian Zip Code Geolocation Dataset. Retrieved from [https://www.ibge.gov.br/en/]
 5. Pagan Research [https://paganresearch.io/company/olist]
-6. VINICIUS DUZAC CERUTTI(2022) Retrieve from: https://www.kaggle.com/code/ceruttivini/rfm-segmentation-and-customer-analysis
-7. KHUSHEE KAPOOR(2022) Retrieve from: https://www.kaggle.com/code/khusheekapoor/relational-database-eda-data-preparation
+6. VINICIUS DUZAC CERUTTI(2022) Retrieved from: [https://www.kaggle.com/code/ceruttivini/rfm-segmentation-and-customer-analysis]
+7. KHUSHEE KAPOOR(2022) Retrieved from: [https://www.kaggle.com/code/khusheekapoor/relational-database-eda-data-preparation]
 
    
 
