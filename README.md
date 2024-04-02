@@ -374,16 +374,20 @@ The query results are summarised as follows:
 
 
 ## Recommendations
+-On top of the RFM analysis, a customer lifetime value can be calculated to assess the long-term profitability of different customer segments. Therefore, marketers can better understand which customer segments contribute the most to revenue and prioritize marketing efforts to the target market accordingly.
 
 ### Limitations
-I had to remove all zero values
-
+- The e-commerce landscape in Brazil is constantly evolving, influenced by factors such as technology advancements, regulatory changes, and competitive pressures. Historical data may not fully capture these dynamic shifts.
+- The dataset primarily focuses on transactions within the Olist platform, limiting insights into the broader e-commerce ecosystem in Brazil. Understanding competitive dynamics or market share may require data from multiple platforms.
+  
 ### References
 
 1. [PostgreSQL.org] (https://www.postgresql.org/docs/current/datatype-datetime.html)
 2. Olist Store Ecommerce Dataset. Retrieved from [https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce] 
 4. Brazilian Institute of Geography and Statistics (IBGE), (1972). Brazilian Zip Code Geolocation Dataset. Retrieved from [https://www.ibge.gov.br/en/]
 5. Pagan Research [https://paganresearch.io/company/olist]
+6. VINICIUS DUZAC CERUTTI(2022) Retrieve from: https://www.kaggle.com/code/ceruttivini/rfm-segmentation-and-customer-analysis
+7. KHUSHEE KAPOOR(2022) Retrieve from: https://www.kaggle.com/code/khusheekapoor/relational-database-eda-data-preparation
 
    
 
