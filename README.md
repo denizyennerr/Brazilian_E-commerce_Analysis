@@ -550,7 +550,7 @@ ORDER BY
 LIMIT 10;
 
 ```
-The graph indicates that there is no observable correlation between the number of product categories offered by a seller and the quantity of orders they receive.
+We will again visualize the query by barplot() function from the Seaborn library.
 
 ```Python
 category_counts_sellers= pd.read_csv(r"C:\Users\ASUS\Desktop\category_counts_sellers.csv")
@@ -562,8 +562,174 @@ plt.title('Maximum Category Wise Product Sellers')
 plt.xlabel('Number of Category')
 plt.ylabel('Number of Products')
 ```
+The graph indicates that there is no observable correlation between the number of product categories offered by a seller and the quantity of orders they receive.
 
 ![category_count_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/365599ff-eb4b-45b5-893a-ee04b991df5f)
+
+Next, we will conduct a customer analysis.
+We will start with plotting the regions where users with the highest number of installment payments reside.
+
+```SQL
+With Data as (SELECT 
+	c.customer_state,
+	count( distinct o.order_id) as order_count,
+    AVG(p.payment_installments) AS average_payment_installments
+FROM 
+    customers c 
+JOIN 
+    orders o ON o.customer_id = c.customer_id
+JOIN 
+    order_payments p ON p.order_id = o.order_id
+Where p.payment_installments>12
+GROUP BY 
+    p.payment_installments,	c.customer_state
+Order by 2 desc)
+Select customer_state, 
+		count(order_count) from Data
+		group by 1
+		order by 2 desc;
+```
+We will again visualize our query by barplot() function from the Seaborn library.
+```Python
+highest_number_of_installment_payments_reside= pd.read_csv(r"C:\Users\ASUS\Desktop\highest_number_of_installment_payments_reside.csv")
+highest_number_of_installment_payments_reside
+
+plt.figure(figsize=(15,8))
+sns.barplot(x='customer_state', y='count', data=highest_number_of_installment_payments_reside)
+plt.title('Analyzing Number of Payment Installments Per State')
+plt.xlabel('Customer State')
+plt.ylabel('Payment Installments')
+plt.show()
+```
+![highest_number_of_installment_payments_reside](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c00acf76-f394-47d1-bf59-119bdf06b719)
+
+This output represents the count of users residing in different regions where users with the highest number of installment payments reside. Each region code is followed by the count of users. For instance, "SP" indicates the São Paulo region with 10 users have the highest number of installment payments. Similarly, "RJ" represents Rio de Janeiro with 8 users, "MG" represents Minas Gerais with 6 users, and so on.
+
+Next, we will calculate the number of successful orders and the total successful payment amount based on the payment method.
+```SQL
+Select 	op.payment_type,
+		count(distinct o.order_id), 
+		sum(case when o.order_status not in ('cancelled', 'unavailable') then op.payment_value end) as succesful_payment
+from order_payments op
+join orders o on o.order_id = op.order_id
+group by op.payment_type 
+order by op.payment_type desc
+;
+```
+
+We will again visualize our query by barplot() function from the Seaborn library.
+```Python
+payment_type= pd.read_csv(r"C:\Users\ASUS\Desktop\payment_type_segmentatiton.csv")
+payment_type
+
+plt.figure(figsize=(15,8))
+sns.barplot(x='payment_type', y='count', data=payment_type, ci=None, palette=['purple','yellow','orange' ,'red', 'green'])
+plt.title('Total Successful Orders Based On the Payment Method')
+plt.xlabel('Payment Method')
+plt.ylabel('Number of Successful Orders')
+plt.show()
+```
+![payment_type](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/fbb66618-c876-43ff-98f5-c7d6bfdfffe5)
+
+We can see that  the payment methods used by customers along with the corresponding order count and total successful payment amount. 
+
+- "voucher": There are 3,866 orders made using vouchers, with a total successful payment amount of 375,539.32.
+- "not_defined": There are 3 orders for which the payment method is not defined, resulting in a total successful payment amount of 0.00.
+- "debit_card": There are 1,528 orders paid using debit cards, totaling 215,129.02 in the successful payment amount.
+- "credit_card": The most common payment method is a credit card, with 76,505 orders and a total successful payment amount of 12,447,417.87.
+- "boleto": Boletos, or bank slips, were used for 19,784 orders, amounting to 2,844,306.40 in successful payment.
+
+We will now analyze the category-wise distribution of orders paid in single payment and in installments. We will also analyze the categories that are commonly paid in installments.
+
+Query for orders paid in a single payment:
+```SQL
+WITH orders_single_payment AS (
+    SELECT 
+        pr.product_category_name,
+        COUNT(DISTINCT o.order_id) AS order_count
+    FROM
+        orders o
+    JOIN 
+        order_payments op ON op.order_id = o.order_id
+    JOIN 
+        order_items oi ON oi.order_id = op.order_id
+    JOIN 
+        products pr ON pr.product_id = oi.product_id
+    WHERE
+        op.payment_installments = 1
+    GROUP BY 
+        pr.product_category_name
+)
+SELECT 
+    'tek_cekim' AS payments,
+    product_category_name,
+    order_count
+FROM 
+    orders_single_payment
+ORDER BY 
+    order_count DESC,
+    product_category_name DESC; 
+```
+```Python
+single_payment_installments=pd.read_csv(r"C:\Users\ASUS\Desktop\single_installment.csv")
+single_payment_installments
+
+plt.figure(figsize=(16, 8))
+sns.barplot(x='product_category_name', y='order_count', data=single_payment_installments, palette='viridis')
+plt.title('Analyzing Category-Wise Number of Payment Installments')
+plt.xlabel('Product Category')
+plt.ylabel('Count of Payment Installments')
+plt.xticks(rotation=90)
+plt.show()
+```
+
+Query for orders paid in multiple installments:
+```SQL
+WITH orders_installments AS (
+    SELECT 
+        pr.product_category_name,
+        COUNT(DISTINCT o.order_id) AS order_count
+    FROM
+        orders o
+    JOIN 
+        order_payments op ON op.order_id = o.order_id
+    JOIN 
+        order_items oi ON oi.order_id = op.order_id
+    JOIN 
+        products pr ON pr.product_id = oi.product_id
+    WHERE
+        op.payment_installments > 1
+    GROUP BY 
+        pr.product_category_name
+)
+SELECT 
+    'taksitli' AS payments,
+    product_category_name,
+    order_count
+FROM 
+    orders_installments
+ORDER BY 
+    order_count DESC,
+    product_category_name DESC; 
+```
+```Python
+multiple_payment_installments= pd.read_csv(r"C:\Users\ASUS\Desktop\multiple_installments.csv")
+multiple_payment_installments
+
+plt.figure(figsize=(16, 8))
+sns.barplot(x='product_category_name', y='order_count', data=multiple_payment_installments, palette='GnBu_d')
+plt.title('Analyzing Category-Wise Number of Payment Installments')
+plt.xlabel('Product Category')
+plt.ylabel('Count of Payment Installments')
+plt.xticks(rotation=90)
+plt.show()
+```
+
+
+
+
+
+
 
 
 
