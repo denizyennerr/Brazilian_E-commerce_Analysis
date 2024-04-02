@@ -161,16 +161,16 @@ sns.heatmap(monthly_order_data.isnull())
 ```SQL
 SELECT * from orders limit 10;
 ``` 
-### To start, we view the first 10 orders of the dataset.
+To start, we view the first 10 orders of the dataset.
 
-### The Customer Table, found in the customers_dataset, includes the following columns:
-### customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
-### customer_unique_id: provides a unique identifier for each customer.
+The Customer Table, found in the customers_dataset, includes the following columns:
+- customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
+- customer_unique_id: provides a unique identifier for each customer.
 
-### In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
-### customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
-### customer_city: indicates the name of the customer's city.
-### customer_state: specifies the customer's state.
+In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
+- customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
+- customer_city: indicates the name of the customer's city.
+- customer_state: specifies the customer's state.
 
 ```SQL
 SELECT count(order_id),
