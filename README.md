@@ -48,7 +48,7 @@ sns.heatmap(monthly_order_data.isnull())
 
 ## EDA( Exploratory Data Analysis)
 
--- The Order Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:
+**The Order Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:**
 
 - order_id: A unique identifier for each order.
 - order_item_id: A sequential number indicating the position of an item within the order.
@@ -58,7 +58,8 @@ sns.heatmap(monthly_order_data.isnull())
 - price: The price of the item.
 - freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
 
--- The Product Table contains the following columns:
+
+**The Product Table contains the following columns:**
 
 - product_id: A unique identifier for each product.
 - product_category_head: The root category of the product, originally in Portuguese.
@@ -70,12 +71,14 @@ sns.heatmap(monthly_order_data.isnull())
 - product_height_cm: The height of the product measured in centimeters.
 - product_width_cm: The width of the product measured in centimeters.
 
--- The Product Category Info Table contains the following columns:
+
+**The Product Category Info Table contains the following columns:**
 
 - product_category_name: The category name was originally in Portuguese.
 - product_name_english: The category name is translated into English.
 
-The Order Table, found in the olist_orders_dataset, includes the following columns:
+
+**The Order Table, found in the olist_orders_dataset, includes the following columns:**
 
 - order_id: a unique identifier for each order.
 - customer_id: serves as a key to the customer dataset, ensuring each order is associated with a unique customer.
@@ -86,7 +89,8 @@ The Order Table, found in the olist_orders_dataset, includes the following colum
 - order_delivered_customer_date: indicates the actual delivery date of the order to the customer.
 - order_estimated_delivery_date: provides the estimated delivery date communicated to the customer at the time of purchase.
 
-The Review Table, found in the olist_order_reviews_dataset, contains the following columns:
+
+**The Review Table, found in the olist_order_reviews_dataset, contains the following columns:**
 
 - review_id: a unique identifier for each review.
 - order_id: a unique identifier for each order.
@@ -96,7 +100,8 @@ The Review Table, found in the olist_order_reviews_dataset, contains the followi
 - review_creation_date: indicates the date the satisfaction survey was sent to the customer.
 - review_answer_timestamp: denotes the timestamp of the customer's response to the satisfaction survey.
 
-The Order Payment Table, found in the olist_order_payments_dataset, includes the following columns:
+
+**The Order Payment Table, found in the olist_order_payments_dataset, includes the following columns:**
 
 - order_id: a unique identifier for each order.
 - payment_sequential: indicates the sequence number for payments made by a customer for an order.
@@ -104,14 +109,16 @@ The Order Payment Table, found in the olist_order_payments_dataset, includes the
 - payment_installments: denotes the number of installments chosen by the customer for payment.
 - payment_value: represents the value of the transaction.
 
-The Seller Table, found in the olist_sellers_dataset, contains the following columns:
+
+**The Seller Table, found in the olist_sellers_dataset, contains the following columns:**
 
 - seller_id: a unique identifier for each seller.
 - seller_zip_code: the first 5 digits of the seller's zip code.
 - seller_city: the name of the city where the seller is located.
 - seller_state: the state where the seller is located.
 
-The Customer Table, found in the olist_customers_dataset, includes the following columns:
+
+**The Customer Table, found in the olist_customers_dataset, includes the following columns:**
 
 - customer_id: serves as a reference key to the orders dataset, with each order having a unique customer_id.
 - customer_unique_id: provides a distinct identifier for each customer. This ensures that repeat purchases made by the same customer can be identified within the dataset. Otherwise, each order would appear associated with a different customer.
@@ -141,6 +148,7 @@ The Customer Table, found in the olist_customers_dataset, includes the following
 - Who are the top 5 sellers that deliver orders to customers most efficiently? Bring the top 5 sellers who deliver orders to customers most efficiently? Analyze and interpret their order counts along with the reviews and ratings of their products.
 - Which sellers sell products across a wider range of categories? Do sellers with a wider range of categories also have higher order counts?
 
+
 ### EDA involved in exploring the Olist dataset to answer key questions for payment analysis are as such:
 
 - In which regions do users that have more installments for payment primarily live?
@@ -148,10 +156,11 @@ The Customer Table, found in the olist_customers_dataset, includes the following
 - What is the distribution of orders based on payment method, specifically comparing single payments versus installments across different product categories? Which categories are most frequently paid for in installments?
 
 
-
 ## Data Analysis
+
 ```SQL
 SELECT * from orders limit 10;
+``` 
 # To start, we view the first 10 orders of the dataset.
 
 # The Customer Table, found in the customers_dataset, includes the following columns:
@@ -163,60 +172,66 @@ SELECT * from orders limit 10;
 # customer_city: indicates the name of the customer's city.
 # customer_state: specifies the customer's state.
 
+```SQL
 SELECT count(order_id),
 	EXTRACT(MONTH from order_approved_at) AS approved_month
 FROM orders
 GROUP BY approved_month
 ORDER BY approved_month;
+```
 
 #We can now see the distribution of orders on a monthly basis.
-```
+
 - With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
 
-``` Python
 
 # We first start with importing the relevant libraries.
+
+``` Python
 
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
+```
 
 # Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
+
+``` Python
 
 monthly_order_data= pd.read_csv(r"C:\Users\ASUS\Desktop\monthly_order.csv")
 monthly_order_data.dropna(inplace=True)
 monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
+```
 
 #At last, we use the barplot() function to visualize the distribution of orders across different months.
 
+``` Python
 plt.figure(figsize=(15, 8))
 sns.barplot(x='approved_month', y='count', data=monthly_order_data.astype(int), palette=['brown'], linewidth=2, ci=None)
 plt.title('Monthly Orders Over Time', color='white')
 plt.xlabel('Months', color='white')
 plt.ylabel('Number of Orders', color='white')
 plt.show()
-
 ```
 
 ![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
 
 
- ``` SQL
 #Although we did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders. 
 
+ ``` SQL
 Select count(order_id), order_status,
 		extract(month from order_approved_at) as approved_month
 from orders
 group by order_status, approved_month
 order by order_status desc, approved_month desc;
-
 ```
 
 
-``` Python
 # We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will again use a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
 
+``` Python
 unavailable_or_cancelled_orders = order_status_distribution[(order_status_distribution['order_status'] == 'unavailable') | (order_status_distribution['order_status'] == 'cancelled')]
 
 
@@ -234,9 +249,9 @@ plt.show()
 
 ```
 
-``` Python
 #We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
 
+``` Python
 delivered_orders= order_status_distribution[order_status_distribution['order_status'] == 'delivered']
 
 plt.figure(figsize=(12, 6))
@@ -252,13 +267,11 @@ plt.show()
 ```
 
 ![order_satus_delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1f4f1003-91f9-4977-86c4-12727f07f442)
-
-
-- After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day.
-    
-``` SQL
+#After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day.
+  
 #We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
 
+``` SQL
 SELECT 
     COUNT(o.order_id) AS order_count,
     t.product_category_name_english,
@@ -280,8 +293,10 @@ ORDER BY  order_count desc
 limit 15
 ;
 ```
-``` Python
+
 #Once we import our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during the Valentine's Day shopping craze.
+
+``` Python
 
 product_category_valentines_day= pd.read_csv(r"C:\Users\ASUS\Desktop\product_category_valentines_day.csv")
 product_category_valentines_day
@@ -298,17 +313,16 @@ plt.show()
 
 ![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
 
-``` SQL
 # Analyzing the number of orders based on the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
-
+``` SQL
 Select count(order_id) as order_count,
 to_char(order_purchase_timestamp, 'Day') as approved_day
 from orders
 group by approved_day
 order by approved_day;
-
+``` 
 # Examining the order counts by the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
-
+``` SQL
 Select count(order_id) as order_count, 
 extract(day from order_purchase_timestamp) as days_of_the_month
 from orders
@@ -316,27 +330,32 @@ group by approved_day, days_of_the_month
 order by approved_day , days_of_the_month 
 ;
 ```
-``` Python
+
 
 #After importing our CSV file into Jupyter Notebook, we can proceed with visualizing our data. Depending on the nature of our analysis, we will utilize various visualization libraries such as Matplotlib, Seaborn, or Plotly.
 
+``` Python
 days_order_count = pd.read_csv(r"C:\Users\ASUS\Desktop\days_order_count.csv")
 days_order_count
+```
 
 # For this visualization, we used a pie chart to visualize the distribution of order counts by days of the week. 
+``` Python
 plt.figure(figsize=(10, 6))
 plt.pie(days_order_count['order_count'], labels=days_order_count['approved_day'], autopct='%1.1f%%', startangle=140)
 plt.title('Order Count by Days of the Week')
 plt.axis('equal')  
 plt.show()
+```
 
 #Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
 
+``` Python
 days_of_the_month_order_count= pd.read_csv(r"C:\Users\ASUS\Desktop\days_of_the_month_ordercount.csv")
 
 days_of_the_month_order_count_cleaned= days_of_the_month_order_count.dropna()
 print(days_of_the_month_order_count_cleaned)
-
+```
 #The bar plot displays the distribution of order count across different days of the month. Each bar represents the number of orders received on a specific day of the month. 
 From the visualization, we can observe some patterns:
 - There is some variation in the number of orders throughout the month, with certain days having higher order counts than others.
@@ -346,6 +365,7 @@ From the visualization, we can observe some patterns:
 
 Further analysis could be conducted to identify any underlying trends or patterns driving these fluctuations in order counts on different days of the month.
 
+``` Python
 plt.figure(figsize=(15, 8))
 sns.lineplot(x='days_of_the_month', y='order_count', data=days_of_the_month_order_count_cleaned, ci=None) 
 plt.title('Order Count by Days of the Month')
