@@ -203,7 +203,6 @@ monthly_order_data= pd.read_csv(r"C:\Users\ASUS\Desktop\monthly_order.csv")
 monthly_order_data.dropna(inplace=True)
 monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
 ```
-
 At last, we use the barplot() function to visualize the distribution of orders across different months.
 
 ``` Python
@@ -217,8 +216,7 @@ plt.show()
 
 ![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
 
-
-Although we did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders. 
+This query aims to analyze the distribution of orders based on their status (e.g., delivered, shipped, processed) and the month in which they were approved. It retrieves the count of orders, along with their respective order status and the month in which they were approved. We did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders only. 
 
  ``` SQL
 Select count(order_id), order_status,
@@ -228,16 +226,13 @@ group by order_status, approved_month
 order by order_status desc, approved_month desc;
 ```
 
-
-We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will again use a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
+We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will employ a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
 
 ``` Python
 unavailable_or_cancelled_orders = order_status_distribution[(order_status_distribution['order_status'] == 'unavailable') | (order_status_distribution['order_status'] == 'cancelled')]
 
 
 ![undelivered_cancelled_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/082592e6-6e94-49af-b0a3-d1e3d0946fd8)
-
-
 plt.figure(figsize=(12, 6))
 plt.bar(unavailable_or_cancelled_orders['approved_month'], unavailable_or_cancelled_orders['count'], color='brown', linewidth=3)
 plt.title('Monthly Friction of Unavailable or Cancelled Orders')
@@ -268,7 +263,6 @@ plt.show()
 
 ![order_satus_delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1f4f1003-91f9-4977-86c4-12727f07f442)
 
-
 After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day. We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
 
 ``` SQL
@@ -293,8 +287,7 @@ ORDER BY  order_count desc
 limit 15
 ;
 ```
-
-Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during the Valentine's Day shopping craze.
+Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular for shopping before Valentine's Day.
 
 ``` Python
 
@@ -313,7 +306,7 @@ plt.show()
 
 ![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
 
-Analyzing the number of orders based on the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
+In the following query, we analyzed the number of orders based on the days of the week (e.g., Monday, Thursday).
 
 ``` SQL
 Select count(order_id) as order_count,
@@ -322,7 +315,7 @@ from orders
 group by approved_day
 order by approved_day;
 ``` 
-Examining the order counts by the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
+Examining the order counts by the days of the month (e.g., 1st, 2nd, etc.).
 
 ``` SQL
 Select count(order_id) as order_count, 
@@ -340,7 +333,7 @@ days_order_count = pd.read_csv(r"C:\Users\ASUS\Desktop\days_order_count.csv")
 days_order_count
 ```
 
-For this visualization, we used a pie chart to visualize the distribution of order counts by days of the week. 
+For this visualization, we used a pie chart from Plotly to visualize the distribution of order counts by days of the week. 
 
 ``` Python
 plt.figure(figsize=(10, 6))
@@ -381,7 +374,80 @@ plt.show()
 
 ![linechart](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/98ed5608-e7ab-4c63-9c5a-db88f8f58139)
 
+Next, we will delve deeper into customer analysis by identifying the cities with the highest number of shoppers.
 
+``` SQL
+WITH order_counts AS (
+    SELECT 
+        o.customer_id,
+        c.customer_city,
+        COUNT(o.order_id) AS order_count
+    FROM 
+        orders AS o 
+    LEFT JOIN 
+        customers AS c ON c.customer_id = o.customer_id
+    GROUP BY 
+        o.customer_id,
+        c.customer_city
+), 
+customer_city_rn AS (
+    SELECT 
+        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_count DESC) AS rn,
+        customer_id,
+        customer_city
+    FROM 
+        order_counts
+),
+customer_city AS (
+    SELECT 
+        customer_id,
+        customer_city
+    FROM 
+        customer_city_rn
+    WHERE 
+        rn = 1
+)
+SELECT 
+    cc.customer_city,
+    COUNT(o.order_id)
+FROM 
+    orders AS o
+LEFT JOIN 
+    customer_city AS cc ON o.customer_id = cc.customer_id
+GROUP BY 
+    cc.customer_city
+ORDER BY 
+    COUNT(o.order_id) DESC;
+```
+
+The output of the query provides a list of cities along with the count of orders placed by customers residing in each city. Here is the number of orders per city:
+
+Sao Paulo: 15,540 orders
+Rio de Janeiro: 6,882 orders
+Belo Horizonte: 2,773 orders
+Brasilia: 2,131 orders
+Curitiba: 1,521 orders
+Campinas: 1,444 orders
+Porto Alegre: 1,379 orders
+Salvador: 1,245 orders
+Guarulhos: 1,189 orders
+Sao Bernardo do Campo: 938 orders
+
+This indicates that Sao Paulo has the highest number of orders, followed by Rio de Janeiro, Belo Horizonte, and other cities in descending order of order count.
+
+Now, we will again use Python to visualize this output. We will again employ a barplot() function from the Seaborn.
+
+```Python
+Top_orders_per_city= pd.read_csv(r"C:\Users\ASUS\Desktop\top_orders_per_city.csv")
+Top_orders_per_city
+
+plt.figure(figsize=(20,8))
+sns.barplot(x='customer_city', y='count', data=Top_orders_per_city)
+plt.title('City-wise Top Orders')
+plt.xlabel('Customer City')
+plt.ylabel('Order Count')
+```	
+![top_orders_per_city](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/33a1372a-a868-46a6-ad25-051bce25f928)
 
 
 
