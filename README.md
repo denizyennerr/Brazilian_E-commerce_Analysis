@@ -20,7 +20,7 @@ This data analysis project explores a public dataset of e-commerce orders from O
 
 Presented by Olist, this dataset underscores the platform's success in streamlining e-commerce operations for merchants across Brazilian marketplaces. Olist facilitates seamless connections between merchants and consumers through innovative solutions, fostering a unified and efficient e-commerce ecosystem.
 
-This analysis will delve deeper into understanding the customer journey, comparing seller orders and their delivery times, and analyzing payment methods and payment installment patterns across different regions. Lastly, it will conduct an RFM (Recency, Frequency, Monetary) analysis, and thanks to this segmentation it will reveal the loyal customers and potential retention customers. By unlocking the power of Brazilian e-commerce through data-driven insights, one can reach important findings that can contribute to strategic decision-making and drive further growth in the e-commerce landscape.
+This analysis will delve deeper into understanding the customer journey, comparing seller orders and their delivery times, and analyzing payment methods and payment installment patterns across different regions. Lastly, it will conduct an RFM (Recency, Frequency, Monetary) analysis, and by using this technique marketers can tailor their marketing strategies accordingly. We can easily analyze the segmentation to reveal the loyal customers and the retention customers. By unlocking the power of Brazilian e-commerce through data-driven insights, marketers can reach important findings that can contribute to strategic decision-making and drive further growth in the e-commerce landscape.
 
 ### Tools
 
@@ -41,6 +41,8 @@ In the initial data preparation phase, the following tasks were performed:
 ![ERD pgerd](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a305011e-80b8-4e17-bcc7-a310872d9b06)
 
 As can be depicted from the schema, the database contains seven eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
+
+sns.heatmap(monthly_order_data.isnull())
 
 
 ### EDA( Exploratory Data Analysis)
