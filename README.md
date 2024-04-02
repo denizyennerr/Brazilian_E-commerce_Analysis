@@ -915,13 +915,13 @@ CRM Strategy: Send standard communications with offers and relevant product deal
 Description: Recent buyers who are unsure about future purchases from the company or competitors.
 CRM Strategy: Run promotional campaigns for a limited time, provide product recommendations based on their behavior, and emphasize the benefits of purchasing from the company.
 
-**Promising (17.03%):**
+**Promising (17.03%):*
 
 - Description: Customers who show potential for becoming loyal due to their recent engagement and moderate spending.
 - CRM Strategy: Nurture these customers with personalized recommendations, exclusive offers, and incentives to encourage repeat purchases and loyalty.
 
 
-**New Customers (13.83%):**
+**New Customers (13.83%):*
 
 - Description: Recently acquired customers who have yet to establish long-term engagement with the company.
 - CRM Strategy: Provide a warm welcome with personalized onboarding messages, introductory offers, and guidance on product selection to encourage future interactions and repeat purchases.
@@ -936,7 +936,7 @@ CRM Strategy: Offer a loyalty program, maintain engagement through personalized 
 Description: Top-tier customers with significant spending and loyalty.
 CRM Strategy: Maintain personalized communication, offer exclusive benefits, and provide VIP treatment to reinforce loyalty and advocacy.
 
-**Need Attention (0.25%):**
+**Need Attention (0.25%):*
 - Description: Customers who have made recent purchases but exhibit signs of uncertainty or hesitation.
 - CRM Strategy: Reach out to these customers with targeted communications, addressing any concerns or questions they may have, and providing reassurance to encourage continued engagement and loyalty.
 
