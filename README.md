@@ -180,12 +180,12 @@ GROUP BY approved_month
 ORDER BY approved_month;
 ```
 
-### We can now see the distribution of orders on a monthly basis.
+We can now see the distribution of orders on a monthly basis.
 
-- With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
+With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
 
 
-### We first start with importing the relevant libraries.
+We first start with importing the relevant libraries.
 
 ``` Python
 
@@ -195,7 +195,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 ```
 
-### Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
+Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
 
 ``` Python
 
@@ -204,7 +204,7 @@ monthly_order_data.dropna(inplace=True)
 monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
 ```
 
-### At last, we use the barplot() function to visualize the distribution of orders across different months.
+At last, we use the barplot() function to visualize the distribution of orders across different months.
 
 ``` Python
 plt.figure(figsize=(15, 8))
@@ -218,7 +218,7 @@ plt.show()
 ![monthly_order](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9730eb6f-6e95-49ef-96d0-2eed594d2281)
 
 
-### Although we did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders. 
+Although we did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders. 
 
  ``` SQL
 Select count(order_id), order_status,
@@ -229,7 +229,7 @@ order by order_status desc, approved_month desc;
 ```
 
 
-### We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will again use a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
+We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will again use a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
 
 ``` Python
 unavailable_or_cancelled_orders = order_status_distribution[(order_status_distribution['order_status'] == 'unavailable') | (order_status_distribution['order_status'] == 'cancelled')]
@@ -249,7 +249,7 @@ plt.show()
 
 ```
 
-### We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
+We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
 
 ``` Python
 delivered_orders= order_status_distribution[order_status_distribution['order_status'] == 'delivered']
@@ -267,9 +267,9 @@ plt.show()
 ```
 
 ![order_satus_delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1f4f1003-91f9-4977-86c4-12727f07f442)
-#After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day.
-  
-### We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
+
+
+After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day. We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
 
 ``` SQL
 SELECT 
@@ -294,7 +294,7 @@ limit 15
 ;
 ```
 
-### Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during the Valentine's Day shopping craze.
+Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during the Valentine's Day shopping craze.
 
 ``` Python
 
@@ -313,7 +313,8 @@ plt.show()
 
 ![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
 
-### Analyzing the number of orders based on the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
+Analyzing the number of orders based on the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
+
 ``` SQL
 Select count(order_id) as order_count,
 to_char(order_purchase_timestamp, 'Day') as approved_day
@@ -321,7 +322,7 @@ from orders
 group by approved_day
 order by approved_day;
 ``` 
-### Examining the order counts by the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
+Examining the order counts by the days of the week (e.g., Monday, Thursday) and the days of the month (e.g., 1st, 2nd, etc.).
 
 ``` SQL
 Select count(order_id) as order_count, 
@@ -332,15 +333,15 @@ order by approved_day , days_of_the_month
 ;
 ```
 
-
-### After importing our CSV file into Jupyter Notebook, we can proceed with visualizing our data. Depending on the nature of our analysis, we will utilize various visualization libraries such as Matplotlib, Seaborn, or Plotly.
+After importing our CSV file into Jupyter Notebook, we can proceed with visualizing our data. Depending on the nature of our analysis, we will utilize various visualization libraries such as Matplotlib, Seaborn, or Plotly.
 
 ``` Python
 days_order_count = pd.read_csv(r"C:\Users\ASUS\Desktop\days_order_count.csv")
 days_order_count
 ```
 
-### For this visualization, we used a pie chart to visualize the distribution of order counts by days of the week. 
+For this visualization, we used a pie chart to visualize the distribution of order counts by days of the week. 
+
 ``` Python
 plt.figure(figsize=(10, 6))
 plt.pie(days_order_count['order_count'], labels=days_order_count['approved_day'], autopct='%1.1f%%', startangle=140)
@@ -349,7 +350,7 @@ plt.axis('equal')
 plt.show()
 ```
 
-### Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
+Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
 
 ``` Python
 days_of_the_month_order_count= pd.read_csv(r"C:\Users\ASUS\Desktop\days_of_the_month_ordercount.csv")
@@ -357,14 +358,15 @@ days_of_the_month_order_count= pd.read_csv(r"C:\Users\ASUS\Desktop\days_of_the_m
 days_of_the_month_order_count_cleaned= days_of_the_month_order_count.dropna()
 print(days_of_the_month_order_count_cleaned)
 ```
-### The bar plot displays the distribution of order count across different days of the month. Each bar represents the number of orders received on a specific day of the month. 
+
+The bar plot displays the distribution of order count across different days of the month. Each bar represents the number of orders received on a specific day of the month. 
 From the visualization, we can observe some patterns:
 - There is some variation in the number of orders throughout the month, with certain days having higher order counts than others.
 - Some days show peaks in order counts, indicating periods of increased sales activity.
 - Other days exhibit lower order counts, suggesting quieter periods in terms of order placements.
 - Overall, there seems to be some variability in order volumes across different days of the month, which could be influenced by factors such as promotions, seasonality, or customer behavior. 
 
-### Further analysis could be conducted to identify any underlying trends or patterns driving these fluctuations in order counts on different days of the month.
+Further analysis could be conducted to identify any underlying trends or patterns driving these fluctuations in order counts on different days of the month.
 
 ``` Python
 plt.figure(figsize=(15, 8))
