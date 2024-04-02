@@ -14,7 +14,7 @@
 - [References](#references)
 
 
-### Project Overview: 
+## Project Overview: 
 
 This data analysis project explores a public dataset of e-commerce orders from Olist. Olist is a prominent online e-commerce platform connecting merchants to the main marketplaces of Brazil. The dataset comprises 100,000 orders between 2016 and 2018, offering valuable information on various aspects of the customer journey, including order status, pricing, payment, and customer reviews.
 
@@ -22,21 +22,21 @@ Presented by Olist, this dataset underscores the platform's success in streamlin
 
 This analysis will delve deeper into understanding the customer journey, comparing seller orders and their delivery times, and analyzing payment methods and payment installment patterns across different regions. Lastly, it will conduct an RFM (Recency, Frequency, Monetary) analysis, and by using this technique marketers can tailor their marketing strategies accordingly. We can easily analyze the segmentation to reveal the loyal customers and the retention customers. By unlocking the power of Brazilian e-commerce through data-driven insights, marketers can reach important findings that can contribute to strategic decision-making and drive further growth in the e-commerce landscape.
 
-### Tools
+## Tools
 
 - Excel- Data Cleaning
    - [Download here] (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 - PostgreSQL- Data Analysis
 - Python- Data Visualisation
 
-### Data Cleaning/Preparation
+## Data Cleaning/Preparation
 
 In the initial data preparation phase, the following tasks were performed:
 1. Data Loading and inspection.
 2. Data cleaning and formatting.
 
 
-### Database Schema (ERD)
+## Database Schema (ERD)
 
 ![ERD pgerd](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a305011e-80b8-4e17-bcc7-a310872d9b06)
 
@@ -45,7 +45,82 @@ As can be depicted from the schema, the database contains eight tables. These ta
 sns.heatmap(monthly_order_data.isnull())
 
 
-### EDA( Exploratory Data Analysis)
+
+## EDA( Exploratory Data Analysis)
+
+-- The Order Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:
+
+- order_id: A unique identifier for each order.
+- order_item_id: A sequential number indicating the position of an item within the order.
+- product_id: A unique identifier for each product.
+- seller_id: A unique identifier for each seller.
+- shipping_limit_date: The deadline set by the seller for handing over the order to the logistics partner.
+- price: The price of the item.
+- freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
+
+-- The Product Table contains the following columns:
+
+- product_id: A unique identifier for each product.
+- product_category_head: The root category of the product, originally in Portuguese.
+- product_name_length: The length of the product name in characters.
+- product_description_length: The length of the product description in characters.
+- product_photos_qty: The number of photos published for the product.
+- product_weight_g: The weight of the product measured in grams.
+- product_length_cm: The length of the product measured in centimeters.
+- product_height_cm: The height of the product measured in centimeters.
+- product_width_cm: The width of the product measured in centimeters.
+
+-- The Product Category Info Table contains the following columns:
+
+- product_category_name: The category name was originally in Portuguese.
+- product_name_english: The category name is translated into English.
+
+The Order Table, found in the olist_orders_dataset, includes the following columns:
+
+- order_id: a unique identifier for each order.
+- customer_id: serves as a key to the customer dataset, ensuring each order is associated with a unique customer.
+- order_status: indicates the status of the order (delivered, shipped, etc.).
+- order_purchase_timestamp: displays the timestamp of the purchase.
+- order_approved_at: denotes the timestamp when payment for the order was approved.
+- order_delivered_carrier_date: represents the timestamp when the order was handed over to the logistic partner for delivery.
+- order_delivered_customer_date: indicates the actual delivery date of the order to the customer.
+- order_estimated_delivery_date: provides the estimated delivery date communicated to the customer at the time of purchase.
+
+The Review Table, found in the olist_order_reviews_dataset, contains the following columns:
+
+- review_id: a unique identifier for each review.
+- order_id: a unique identifier for each order.
+- review_score: a rating ranging from 1 to 5 provided by the customer in a satisfaction survey.
+- review_comment_title: the title of the comment left by the customer in Portuguese.
+- review_comment_message: the message of the comment left by the customer in Portuguese.
+- review_creation_date: indicates the date the satisfaction survey was sent to the customer.
+- review_answer_timestamp: denotes the timestamp of the customer's response to the satisfaction survey.
+
+The Order Payment Table, found in the olist_order_payments_dataset, includes the following columns:
+
+- order_id: a unique identifier for each order.
+- payment_sequential: indicates the sequence number for payments made by a customer for an order.
+- payment_type: specifies the method of payment selected by the customer.
+- payment_installments: denotes the number of installments chosen by the customer for payment.
+- payment_value: represents the value of the transaction.
+
+The Seller Table, found in the olist_sellers_dataset, contains the following columns:
+
+- seller_id: a unique identifier for each seller.
+- seller_zip_code: the first 5 digits of the seller's zip code.
+- seller_city: the name of the city where the seller is located.
+- seller_state: the state where the seller is located.
+
+The Customer Table, found in the olist_customers_dataset, includes the following columns:
+
+- customer_id: serves as a reference key to the orders dataset, with each order having a unique customer_id.
+- customer_unique_id: provides a distinct identifier for each customer. This ensures that repeat purchases made by the same customer can be identified within the dataset. Otherwise, each order would appear associated with a different customer.
+
+- customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
+- customer_city: specifies the name of the customer's city.
+- customer_state: indicates the state where the customer is located.
+
+
 
 ### EDA involved in exploring the Olist dataset to answer key questions for order analysis are as such:
 
@@ -74,7 +149,7 @@ sns.heatmap(monthly_order_data.isnull())
 
 
 
-### Data Analysis
+## Data Analysis
 ```SQL
 SELECT * from orders limit 10;
 # To start, we view the first 10 orders of the dataset.
@@ -180,34 +255,7 @@ plt.show()
 
 
 - After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day.
-  
--- The Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:
-
-- order_id: A unique identifier for each order.
-- order_item_id: A sequential number indicating the position of an item within the order.
-- product_id: A unique identifier for each product.
-- seller_id: A unique identifier for each seller.
-- shipping_limit_date: The deadline set by the seller for handing over the order to the logistics partner.
-- price: The price of the item.
-- freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
-
--- The Product Table contains the following columns:
-
-- product_id: A unique identifier for each product.
-- product_category_head: The root category of the product, originally in Portuguese.
-- product_name_length: The length of the product name in characters.
-- product_description_length: The length of the product description in characters.
-- product_photos_qty: The number of photos published for the product.
-- product_weight_g: The weight of the product measured in grams.
-- product_length_cm: The length of the product measured in centimeters.
-- product_height_cm: The height of the product measured in centimeters.
-- product_width_cm: The width of the product measured in centimeters.
-
--- The Product Category Info Table contains the following columns:
-
-- product_category_name: The category name was originally in Portuguese.
-- product_name_english: The category name is translated into English.
-  
+    
 ``` SQL
 #We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
 
@@ -318,14 +366,14 @@ plt.show()
 
 
 
-### Results/Findings
+## Results/Findings
 The query results are summarised as follows:
 1. Users who opt for more installments during payment primarily reside in São Paulo (SP), followed by Rio de Janeiro (RJ), Minas Gerais (MG), and Paraná (PR). 
 2. The number of users choosing more installments decreases gradually in these regions. 
 3. Other regions such as Rio Grande do Sul (RS), Bahia (BA), and Paraíba (PB) also have higher installments, although to a lesser extent.
 
 
-### Recommendations
+## Recommendations
 
 ### Limitations
 I had to remove all zero values
