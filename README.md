@@ -668,6 +668,16 @@ ORDER BY
     order_count DESC,
     product_category_name DESC; 
 ```
+The following data indicates the distribution of orders paid in single-payment installments across different product categories. 
+
+- "esporte_lazer": The category of "Sports and Leisure" has the highest number of orders paid in a single payment installment, with 4,299 orders.
+- "informatica_acessorios": Following closely, the "Computers and Accessories" category accounts for 4,177 orders.
+- "beleza_saude": The "Beauty and Health" category ranks third with 3,880 orders paid in a single payment installment.
+- "cama_mesa_banho": The category of "Bed, Bath, and Table" follows with 3,535 orders.
+- "moveis_decoracao": Lastly, the "Furniture and Decoration" category has 3,152 orders paid in a single payment installment.
+
+![single_installments](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a3ce43bb-c31d-4188-acb3-7f7e6f6f7456)
+
 ```Python
 single_payment_installments=pd.read_csv(r"C:\Users\ASUS\Desktop\single_installment.csv")
 single_payment_installments
@@ -710,6 +720,14 @@ ORDER BY
     order_count DESC,
     product_category_name DESC; 
 ```
+The following graph shows the distribution of orders paid in multiple payment installments across different product categories. As such;
+
+- "cama_mesa_banho": There are 5,965 orders in the category of "Bed, Bath, and Table," indicating that this category has the highest number of orders paid in multiple installments.
+- "beleza_saude": The "Beauty and Health" category follows closely with 5,006 orders.
+- "relogios_presentes": The category of "Watches and Gifts" has 3,794 orders paid in multiple installments.
+- "esporte_lazer": "Sports and Leisure" category accounts for 3,480 orders.
+- "moveis_decoracao": Lastly, the "Furniture and Decoration" category has 3,353 orders paid in multiple installments.
+
 ```Python
 multiple_payment_installments= pd.read_csv(r"C:\Users\ASUS\Desktop\multiple_installments.csv")
 multiple_payment_installments
@@ -722,6 +740,7 @@ plt.ylabel('Count of Payment Installments')
 plt.xticks(rotation=90)
 plt.show()
 ```
+![multiple_installments](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ff9550da-b638-44f4-b2f9-62fc50458c2f)
 
 
 
