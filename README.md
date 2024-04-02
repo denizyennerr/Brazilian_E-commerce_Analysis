@@ -300,11 +300,9 @@ plt.xticks(rotation=90)
 plt.tight_layout()
 plt.show()
 ```
-
 ![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
 
 In the following query, we analyzed the number of orders based on the days of the week (e.g., Monday, Thursday).
-
 ``` SQL
 Select count(order_id) as order_count,
 to_char(order_purchase_timestamp, 'Day') as approved_day
