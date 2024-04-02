@@ -742,20 +742,251 @@ plt.show()
 ```
 ![multiple_installments](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ff9550da-b638-44f4-b2f9-62fc50458c2f)
 
+Lastly, we will conduct the RFM (Recency, Frequency, Monetary) analysis and analyze customer behavior, and segment them into different categories based on recency, frequency, and monetary value. The segmentation can help in targeting specific customer groups with tailored marketing strategies.
+
+```SQL 
+WITH rfm AS (
+  SELECT
+    customer_id,
+    MAX(invoice_date) AS max_invoice_date,
+    EXTRACT(day FROM '2011-12-09'::date - MAX(invoice_date)) AS recency,
+    COUNT(DISTINCT invoice_no) AS frequency,
+    SUM(quantity * unit_price) AS monetary
+  FROM rfm 
+  WHERE quantity > 0 AND customer_id IS NOT NULL
+  GROUP BY customer_id, rfm.invoice_date
+ Order by 3 Desc
+),
+score AS (
+  SELECT
+    *,
+    NTILE(4) OVER (ORDER BY recency DESC) AS recency_score,
+    CASE
+      WHEN frequency <= 1 THEN 1
+      WHEN frequency <= 2 THEN 2
+      WHEN frequency <= 4 THEN 3
+      WHEN frequency <= 6 THEN 4
+      ELSE 5
+    END AS frequency_score,
+    NTILE(4) OVER (ORDER BY monetary ASC) AS monetary_score
+  FROM rfm
+)
+SELECT
+  *,
+  CONCAT(recency_score, frequency_score, monetary_score)::numeric AS rfm_score
+FROM score;
+
+with recency
+as
+(
+SELECT
+	customer_id,
+	max(invoice_date) as last_day,
+	('2011-12-09'-max(invoice_date)::date) as recency
+FROM rfm
+WHERE customer_id is not null and invoice_no not like 'C%'
+GROUP BY customer_id
+ORDER BY 3 asc
+),
+frequency
+as
+(
+SELECT 
+	customer_id,
+	count(distinct invoice_no) as frequency
+FROM rfm
+WHERE customer_id is not null and invoice_no not like 'C%'
+GROUP BY customer_id
+ORDER BY 2 desc
+),
+monetary
+as 
+(
+SELECT 
+	customer_id,
+	round(sum(unit_price*quantity)::decimal,2) as monetary
+FROM rfm
+WHERE  customer_id is not null and invoice_no not like 'C%'
+GROUP BY customer_id
+ORDER BY 2 desc
+),
+scores as
+(
+SELECT
+	f.customer_id,
+	recency,
+	frequency,
+	monetary,
+	ntile(5) over (order by recency desc) as recency_score,
+    CASE
+       WHEN frequency<10 then '1'
+       WHEN frequency >= 10 and frequency < 50 then '2'
+       WHEN frequency >= 50 and frequency < 100 then '3'
+       WHEN frequency >= 100 and frequency <= 150 then '4'
+       WHEN frequency > 150 and frequency <= 250 then '5'
+       END AS frequency_score,
+     CASE
+       WHEN monetary<5000 then '1'
+       WHEN monetary >= 5000 and monetary < 15000 then '2'
+WHEN monetary >= 15000 and monetary < 40000 then '3'
+WHEN monetary >= 40000 and monetary <= 100000 then '4'
+WHEN monetary > 100000 and monetary <= 300000 then '5'
+END AS monetary_score		
+FROM recency as r
+LEFT JOIN frequency as f
+on r.customer_id=f.customer_id
+LEFT JOIN monetary as m
+on r.customer_id=m.customer_id
+ORDER BY 7 desc
+),
+mix_score
+as
+(
+SELECT 
+	customer_id,
+	recency_score,
+	frequency_score,
+	monetary_score,
+	(frequency_score::integer+monetary_score::integer) as mix_score
+FROM scores
+ORDER BY 5
+),
+final_scores as 
+(
+SELECT 
+	customer_id,
+	recency_score,
+	frequency_score,
+	monetary_score,
+	CASE
+		WHEN mix_score=2 then '1'
+		WHEN mix_score>2 and mix_score<=3 then '2'
+		WHEN mix_score>3 and mix_score<=5 then '3'
+		WHEN mix_score>=6 and mix_score<=7 then '4'
+		ELSE '5' end as mixscore
+FROM mix_score
+ORDER BY mix_score desc
+)
+SELECT 
+	customer_id,
+	recency_score,
+	mixscore,
+	CASE 
+		WHEN recency_score::varchar similar to  '[1-2]%' and mixscore::varchar similar to '[1-2]%' then 'Hibernating'
+		WHEN recency_score::varchar similar to  '[1-2]%' and mixscore::varchar similar to '[3-4]%' then 'At_Risk'
+		WHEN recency_score::varchar similar to  '[1-2]%' and mixscore::varchar similar to '[5]%' then 'Cant_Loose'
+		WHEN recency_score::varchar similar to  '[3]%' and mixscore::varchar similar to '[1-2]%' then 'About_to_Sleep'
+		WHEN recency_score::varchar similar to  '[3]%' and mixscore::varchar similar to '[3]%' then 'Need_Attention'
+		WHEN recency_score::varchar similar to  '[4]%' and mixscore::varchar similar to '[1]%' then 'Promising'
+		WHEN recency_score::varchar similar to  '[5]%' and mixscore::varchar similar to '[1]%' then 'New_Customers'
+		WHEN recency_score::varchar similar to  '[4-5]%' and mixscore::varchar similar to '[2-3]%' then 'Potential_Loyaltist'
+		WHEN recency_score::varchar similar to  '[3-4]%' and mixscore::varchar similar to '[4-5]%' then 'Loyal_Customers'
+		WHEN recency_score::varchar similar to  '[5]%' and mixscore::varchar similar to '[4-5]%' then 'Champions'
+		END AS customer_segmentation
+FROM final_scores 
+ORDER BY 2 desc;
+```
+We will visualize our query using the barplot() function from the Seaborn Library.
+```Python
+RFM_Analysis= pd.read_csv(r"C:\Users\ASUS\Desktop\RFM.csv")
+RFM_Analysis
+
+plt.figure(figsize=(10, 5))
+percentage = (RFM_Analysis['customer_segmentation'].value_counts(normalize=True) * 100).reset_index(name='percentage')
+g = sns.barplot(x=percentage['percentage'], y=percentage['index'], data=percentage, palette="viridis")
+sns.despine(bottom=True, left=True)
+for i, v in enumerate(percentage['percentage']):
+    g.text(v, i + 0.20, "  {:.2f}".format(v) + "%", color='black', ha="left")
+g.set_ylabel('Segmentation')
+g.set(xticks=[])
+plt.show()
+```
+![RFM](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/d5260871-b1ed-4f88-8562-6818c11b5aa8)
+
+Based on the analysis of customer segments derived from the query results, the following insights and CRM strategies can be outlined:
+
+**Hibernating (39.82%):*
+
+Customers who made purchases in the past, but infrequently and with low spending.
+CRM Strategy: Send standard communications with offers and relevant product deals to encourage repeat purchases.
+
+**About to Sleep (19.73%):*
+
+Description: Recent buyers who are unsure about future purchases from the company or competitors.
+CRM Strategy: Run promotional campaigns for a limited time, provide product recommendations based on their behavior, and emphasize the benefits of purchasing from the company.
+
+**Promising (17.03%):**
+
+- Description: Customers who show potential for becoming loyal due to their recent engagement and moderate spending.
+- CRM Strategy: Nurture these customers with personalized recommendations, exclusive offers, and incentives to encourage repeat purchases and loyalty.
 
 
+**New Customers (13.83%):**
 
+- Description: Recently acquired customers who have yet to establish long-term engagement with the company.
+- CRM Strategy: Provide a warm welcome with personalized onboarding messages, introductory offers, and guidance on product selection to encourage future interactions and repeat purchases.
 
+**Potential Loyalist (8.57%):*
 
+Description: Recent buyers with good spending habits and multiple purchases.
+CRM Strategy: Offer a loyalty program, maintain engagement through personalized recommendations, and provide incentives for continued loyalty.
+
+**Champions (0.48%):*
+
+Description: Top-tier customers with significant spending and loyalty.
+CRM Strategy: Maintain personalized communication, offer exclusive benefits, and provide VIP treatment to reinforce loyalty and advocacy.
+
+**Need Attention (0.25%):**
+- Description: Customers who have made recent purchases but exhibit signs of uncertainty or hesitation.
+- CRM Strategy: Reach out to these customers with targeted communications, addressing any concerns or questions they may have, and providing reassurance to encourage continued engagement and loyalty.
+
+**At Risk (0.18%):*
+
+Description: Customers who used to purchase frequently but have not made recent purchases, indicating potential disengagement.
+CRM Strategy: Reconnect with personalized communications, offer attractive deals, and emphasize the value of continued patronage.
+
+**Loyal Customers (0.09%):*
+
+Description: High-value customers who make frequent purchases.
+CRM Strategy: Engage in personalized communication, avoid mass mailing of offers, provide tailored product recommendations, and encourage product reviews.
 
 
 
 
 ## Results/Findings
-The query results are summarised as follows:
-1. Users who opt for more installments during payment primarily reside in São Paulo (SP), followed by Rio de Janeiro (RJ), Minas Gerais (MG), and Paraná (PR). 
-2. The number of users choosing more installments decreases gradually in these regions. 
-3. Other regions such as Rio Grande do Sul (RS), Bahia (BA), and Paraíba (PB) also have higher installments, although to a lesser extent.
+
+1. Order Count by Days of the Week:
+   - The distribution of orders across different days of the week shows variations, with certain days seeing higher order volumes compared to others.
+   - Further analysis could identify potential factors influencing daily order trends, such as promotional activities, customer behavior patterns, or external factors like holidays.
+
+2. Monthly Orders for Delivered Orders:
+   - The visualization illustrates the monthly distribution of delivered orders, providing insights into the volume of orders processed over time.
+   - Peaks and troughs in order volumes may coincide with seasonal trends, marketing campaigns, or other external factors affecting consumer behavior.
+
+3. Top 5 Fastest Delivery Sellers by Average Review Score:
+   - This analysis identifies the top five sellers based on their average delivery times and review scores.
+   - Sellers with fast delivery times and high review scores may enjoy a competitive advantage in attracting and retaining customers.
+
+4. Category-Wise Distribution of Payment Installments:
+   - The analysis reveals the distribution of payment installments across different product categories.
+   - Understanding payment preferences can help optimize payment processing systems and tailor promotional offers to match customer preferences.
+
+5. Top Regions with Highest Number of Installment Payments:
+   - By identifying regions with the highest number of installment payments, businesses can target marketing efforts and tailor product offerings to meet the needs of these regions.
+
+6. **Distribution of Orders Paid in Single and Multiple Installments:**
+   - The analysis compares the distribution of orders paid in single and multiple installments across various product categories.
+   - Insights from this analysis can inform inventory management and pricing strategies to accommodate different payment preferences.
+
+7. Customer Segmentation Analysis:
+   - Through RFM (Recency, Frequency, Monetary) analysis, customers are segmented into distinct groups based on their transactional behavior.
+   - Customer segments such as "Champions," "Promising," and "New Customers" offer valuable insights for targeted marketing and customer relationship management strategies.
+
+8. Customer Segmentation Results:
+   - The segmentation analysis categorizes customers into distinct groups based on their RFM scores and behavioral patterns.
+   - Each customer segment requires tailored marketing and retention strategies to maximize engagement and drive profitability.
+
+These findings provide valuable insights for decision-making across various aspects of e-commerce operations, including marketing, customer service, logistics, and product management. Further exploration and refinement of these insights can lead to improved customer satisfaction, retention, and overall business performance.
 
 
 ## Recommendations
