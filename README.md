@@ -204,15 +204,6 @@ SELECT * from orders limit 10;
 ``` 
 To start, we view the first 10 orders of the dataset.
 
-The Customer Table, found in the customers_dataset, includes the following columns:
-- customer_id: serves as the key to the orders dataset, ensuring each order has a unique customer_id.
-- customer_unique_id: provides a unique identifier for each customer.
-
-In this system, each order is linked to a distinct customer_id, meaning the same customer may have different IDs for different orders. The inclusion of customer_unique_id allows for the identification of customers who have made repeat purchases from the store. Otherwise, each order would appear associated with a different customer.
-- customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
-- customer_city: indicates the name of the customer's city.
-- customer_state: specifies the customer's state.
-
 ```SQL
 SELECT count(order_id),
 	EXTRACT(MONTH from order_approved_at) AS approved_month
@@ -223,9 +214,6 @@ ORDER BY approved_month;
 
 We can now see the distribution of orders on a monthly basis.
 
-With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
-
-
 We first start with importing the relevant libraries.
 
 ``` Python
@@ -234,7 +222,7 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 ```
-
+With the help of Matplotlib alongside the Seaborn library, we employ the barplot() function to visualize the distribution of orders across different months. Additionally, we leverage functions from the Matplotlib library to enhance the aesthetic appeal of the plot. As a result, we obtain a clear representation of the monthly order distribution.
 Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
 
 ``` Python
@@ -256,6 +244,7 @@ plt.show()
 ![monthly_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ed51625f-1c53-489e-abb5-a2c14671e41b)
 
 
+The query below aims to analyze the distribution of orders based on their status (e.g., delivered, shipped, processed) and the month in which they were approved. It retrieves the count of orders, along with their respective order status and the month in which they were approved. We did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders only. 
 
  ``` SQL
 Select count(order_id), order_status,
@@ -264,7 +253,6 @@ from orders
 group by order_status, approved_month
 order by order_status desc, approved_month desc;
 ```
-This query aims to analyze the distribution of orders based on their status (e.g., delivered, shipped, processed) and the month in which they were approved. It retrieves the count of orders, along with their respective order status and the month in which they were approved. We did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders only. 
 
 We will now filter the data for orders with order status 'unavailable' or 'cancelled' with Python. And we will employ a barplot() function to visualize the unavailable or cancelled orders by month on the x-axis. The frequency of orders will be depicted on the y-axis.
 
@@ -286,7 +274,10 @@ plt.show()
 ![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a97eb6ba-a691-479e-b0b5-10698ad415fd)
 
 
+We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
+
 ``` Python
+
 delivered_orders= order_status_distribution[order_status_distribution['order_status'] == 'delivered']
 
 plt.figure(figsize=(12, 6))
@@ -300,10 +291,7 @@ plt.tight_layout()
 plt.show()
 
 ```
-We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
-
-
-
+![delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1de88eb4-c646-4431-9387-bfd709bd2b4a)
 
 
 
