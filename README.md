@@ -43,6 +43,7 @@ In the initial data preparation phase, the following tasks were performed:
 As can be depicted from the schema, the database contains eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
 sns.heatmap(monthly_order_data.isnull())
+
 ![heatmap](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ec876f39-8506-4de8-8d4c-25ba5d8d0ad3)
 
 
