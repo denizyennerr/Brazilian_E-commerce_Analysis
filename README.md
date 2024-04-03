@@ -61,6 +61,9 @@ sns.heatmap(monthly_order_data.isnull())
 - freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
 
 We view the first few rows of the table using the limit from PostgreSQL.
+```SQL
+select * from order_items limit 10;
+```
 
 ![Order_items_table](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/e4dc81e7-73b7-45f7-85fa-d62f6d691159)
 
@@ -77,15 +80,22 @@ We view the first few rows of the table using the limit from PostgreSQL.
 - product_width_cm: The width of the product measured in centimeters.
 
 We view the first few rows of the table using the limit from PostgreSQL.
-
-![image](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/e8d41504-d7f1-4ac9-b1cb-3a8483c3413e)
-
+```SQL
+select * from products limit 10;
+```
+![product_table](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a058f4fb-d8d9-42a8-be98-57711cabedb6)
 
 
 **The Product Category Info Table contains the following columns:**
 
 - product_category_name: The category name was originally in Portuguese.
 - product_name_english: The category name is translated into English.
+
+We view the first few rows of the table using the limit from PostgreSQL.
+```SQL
+select * from product_category_name_translation limit 10;
+```
+![product_category_name_translation_table](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c58ac45e-65b9-41f2-aa8c-06219a828ab5)
 
 
 **The Order Table, found in the olist_orders_dataset, includes the following columns:**
@@ -98,6 +108,14 @@ We view the first few rows of the table using the limit from PostgreSQL.
 - order_delivered_carrier_date: represents the timestamp when the order was handed over to the logistic partner for delivery.
 - order_delivered_customer_date: indicates the actual delivery date of the order to the customer.
 - order_estimated_delivery_date: provides the estimated delivery date communicated to the customer at the time of purchase.
+
+We view the first few rows of the table using the limit from PostgreSQL.
+```SQL
+select * from orders limit 10;
+```
+![orders_table1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/d2560a3c-50a8-41a6-8e3b-264f1d45327c)
+
+![orders_table2](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/52fb6c4d-8629-4491-950c-2becb0151f39)
 
 
 **The Review Table, found in the olist_order_reviews_dataset, contains the following columns:**
