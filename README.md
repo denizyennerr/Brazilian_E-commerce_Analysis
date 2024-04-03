@@ -83,7 +83,9 @@ We view the first few rows of the table using the limit from PostgreSQL.
 ```SQL
 select * from products limit 10;
 ```
-![product_table](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a058f4fb-d8d9-42a8-be98-57711cabedb6)
+![products_table1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/7b675f09-fec1-49b5-a45f-fa8fb0b8a15a)
+
+![products_table2](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/54fbb816-018a-4616-8b3e-9f74c0551fa3)
 
 
 **The Product Category Info Table contains the following columns:**
@@ -127,6 +129,10 @@ select * from orders limit 10;
 - review_comment_message: the message of the comment left by the customer in Portuguese.
 - review_creation_date: indicates the date the satisfaction survey was sent to the customer.
 - review_answer_timestamp: denotes the timestamp of the customer's response to the satisfaction survey.
+```SQL
+select * from order_reviews limit 10;
+```
+![order_reviews](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/8b44ae16-3ca8-4c1f-a295-4b65ef959d8e)
 
 
 **The Order Payment Table, found in the olist_order_payments_dataset, includes the following columns:**
@@ -136,6 +142,10 @@ select * from orders limit 10;
 - payment_type: specifies the method of payment selected by the customer.
 - payment_installments: denotes the number of installments chosen by the customer for payment.
 - payment_value: represents the value of the transaction.
+```SQL
+select * from order_payments limit 10;
+```
+![order_payments](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/2b6cd22a-a38f-4659-8d80-b1f6286d1a53)
 
 
 **The Seller Table, found in the olist_sellers_dataset, contains the following columns:**
@@ -144,6 +154,11 @@ select * from orders limit 10;
 - seller_zip_code: the first 5 digits of the seller's zip code.
 - seller_city: the name of the city where the seller is located.
 - seller_state: the state where the seller is located.
+```SQL
+select * from sellers limit 10;
+```
+![sellers](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/d7392d3f-e172-4cc4-ba2b-c6a8dd62d456)
+
 
 
 **The Customer Table, found in the olist_customers_dataset, includes the following columns:**
@@ -154,6 +169,10 @@ select * from orders limit 10;
 - customer_zip_code_prefix: denotes the first five digits of the customer's zip code.
 - customer_city: specifies the name of the customer's city.
 - customer_state: indicates the state where the customer is located.
+```SQL
+select * from customers limit 10;
+```
+![customers](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/0f4b1ce5-0c9c-4b07-9e85-f031be5632e4)
 
 
 
