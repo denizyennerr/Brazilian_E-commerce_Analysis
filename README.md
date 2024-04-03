@@ -42,12 +42,6 @@ In the initial data preparation phase, the following tasks were performed:
 
 As can be depicted from the schema, the database contains eight tables. These tables are orders, sellers, order_items, order_reviews, order_payments, products, customers and the product_category_name_translation. We will examine each table independently and conduct pre-processing to minimize excess space usage.
 
-sns.heatmap(monthly_order_data.isnull())
-
-![sns_heatmap](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/443121fc-ae24-4117-8a9f-ffdaeee22d9d)
-
-
-
 ## EDA( Exploratory Data Analysis)
 
 **The Order Item Table, sourced from the "olist_order_items_dataset", consists of the following columns:**
