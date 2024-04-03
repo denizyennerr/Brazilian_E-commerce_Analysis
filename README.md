@@ -44,7 +44,6 @@ As can be depicted from the schema, the database contains eight tables. These ta
 
 sns.heatmap(monthly_order_data.isnull())
 
-![heatmap](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ec876f39-8506-4de8-8d4c-25ba5d8d0ad3)
 
 
 
@@ -59,6 +58,8 @@ sns.heatmap(monthly_order_data.isnull())
 - shipping_limit_date: The deadline set by the seller for handing over the order to the logistics partner.
 - price: The price of the item.
 - freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
+
+We view the first few rows of the table using the limit() function from PostgreSQL.
 
 
 **The Product Table contains the following columns:**
