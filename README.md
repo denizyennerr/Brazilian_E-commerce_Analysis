@@ -253,8 +253,7 @@ plt.ylabel('Number of Orders', color='white')
 plt.show()
 ```
 
-![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a08e58bd-b4aa-4496-9a33-ae62df5034b8)
-
+![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a97eb6ba-a691-479e-b0b5-10698ad415fd)
 
 
  ``` SQL
