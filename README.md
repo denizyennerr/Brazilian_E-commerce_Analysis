@@ -44,6 +44,7 @@ As can be depicted from the schema, the database contains eight tables. These ta
 
 sns.heatmap(monthly_order_data.isnull())
 
+![sns_heatmap](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/443121fc-ae24-4117-8a9f-ffdaeee22d9d)
 
 
 
