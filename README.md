@@ -319,7 +319,7 @@ ORDER BY  order_count desc
 limit 15
 ;
 ```
-Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular for shopping before Valentine's Day.
+Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during Valentine's Day shopping period.
 
 ``` Python
 product_category_valentines_day= pd.read_csv(r"C:\Users\ASUS\Desktop\product_category_valentines_day.csv")
@@ -334,7 +334,9 @@ plt.xticks(rotation=90)
 plt.tight_layout()
 plt.show()
 ```
-![valentines_day](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/803ac2fc-dc77-42b2-82be-532c1df4191b)
+
+![valentinesday](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/eb327fed-9afd-46cc-933c-aff5c387e9f1)
+
 
 In the following query, we analyzed the number of orders based on the days of the week (e.g., Monday, Thursday).
 ``` SQL
@@ -344,7 +346,7 @@ from orders
 group by approved_day
 order by approved_day;
 ``` 
-Examining the order counts by the days of the month (e.g., 1st, 2nd, etc.).
+We also examined the order counts by the days of the month (e.g., 1st, 2nd, etc.).
 
 ``` SQL
 Select count(order_id) as order_count, 
@@ -371,7 +373,10 @@ plt.title('Order Count by Days of the Week')
 plt.axis('equal')  
 plt.show()
 ```
-![pie](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c1331989-b400-4b79-aa99-e39c65a46dfa)
+
+![pie](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/39364569-80df-486e-93ac-e2ae2c892a9e)
+
+
 
 Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
 
@@ -393,14 +398,25 @@ Further analysis could be conducted to identify any underlying trends or pattern
 
 ``` Python
 plt.figure(figsize=(15, 8))
-sns.lineplot(x='days_of_the_month', y='order_count', data=days_of_the_month_order_count_cleaned, ci=None) 
+sns.lineplot(x='days_of_the_month', y='order_count', data=days_of_the_month_order_count_cleaned, ci=None, marker='o', markersize=8) 
 plt.title('Order Count by Days of the Month')
 plt.xlabel('Days of the Month ')
 plt.ylabel('Number of Orders')
 plt.show()
 
 ```
-![linechart](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/98ed5608-e7ab-4c63-9c5a-db88f8f58139)
+
+
+
+
+
+
+
+
+
+
+
+
 
 Next, we will delve deeper into customer analysis by identifying the cities with the highest number of shoppers.
 
