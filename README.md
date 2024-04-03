@@ -241,7 +241,7 @@ plt.ylabel('Number of Orders', color='white')
 plt.show()
 ```
 
-![monthly_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ed51625f-1c53-489e-abb5-a2c14671e41b)
+![monthly_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/3ee4033a-9a28-4726-80f5-e5aaeeec034a)
 
 
 The query below aims to analyze the distribution of orders based on their status (e.g., delivered, shipped, processed) and the month in which they were approved. It retrieves the count of orders, along with their respective order status and the month in which they were approved. We did not filter explicitly for the order_status by using SQL, we found the order status friction of the monthly orders only. 
