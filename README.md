@@ -253,7 +253,8 @@ plt.ylabel('Number of Orders', color='white')
 plt.show()
 ```
 
-![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a97eb6ba-a691-479e-b0b5-10698ad415fd)
+![monthly_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ed51625f-1c53-489e-abb5-a2c14671e41b)
+
 
 
  ``` SQL
@@ -282,6 +283,7 @@ plt.tight_layout()
 plt.show()
 
 ```
+![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a97eb6ba-a691-479e-b0b5-10698ad415fd)
 
 
 ``` Python
@@ -299,6 +301,8 @@ plt.show()
 
 ```
 We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
+
+
 
 
 
