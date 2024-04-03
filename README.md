@@ -60,8 +60,9 @@ sns.heatmap(monthly_order_data.isnull())
 - price: The price of the item.
 - freight_value: The freight cost associated with the item. If an order contains multiple items, the freight cost is divided among them.
 
-We view the first few rows of the table using the limit() function from PostgreSQL.
+We view the first few rows of the table using the limit from PostgreSQL.
 
+![Order_items_table](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/e4dc81e7-73b7-45f7-85fa-d62f6d691159)
 
 **The Product Table contains the following columns:**
 
@@ -74,6 +75,11 @@ We view the first few rows of the table using the limit() function from PostgreS
 - product_length_cm: The length of the product measured in centimeters.
 - product_height_cm: The height of the product measured in centimeters.
 - product_width_cm: The width of the product measured in centimeters.
+
+We view the first few rows of the table using the limit from PostgreSQL.
+
+![image](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/e8d41504-d7f1-4ac9-b1cb-3a8483c3413e)
+
 
 
 **The Product Category Info Table contains the following columns:**
