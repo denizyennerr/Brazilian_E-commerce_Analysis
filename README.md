@@ -258,27 +258,28 @@ We will now filter the data for orders with order status 'unavailable' or 'cance
 
 ``` Python
 unavailable_or_cancelled_orders = order_status_distribution[(order_status_distribution['order_status'] == 'unavailable') | (order_status_distribution['order_status'] == 'cancelled')]
-
-
-![undelivered_cancelled_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/082592e6-6e94-49af-b0a3-d1e3d0946fd8)
+months = sorted(unavailable_or_cancelled_orders['approved_month'].unique())
 plt.figure(figsize=(12, 6))
 plt.bar(unavailable_or_cancelled_orders['approved_month'], unavailable_or_cancelled_orders['count'], color='brown', linewidth=3)
+plt.xticks(months, rotation=0, fontsize=10)
 plt.title('Monthly Friction of Unavailable or Cancelled Orders')
 plt.xlabel('Approved Month')
 plt.ylabel('Frequency')
-plt.xticks(rotation=45, fontsize=10)
 plt.tight_layout()
 plt.show()
-
 ```
-![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a97eb6ba-a691-479e-b0b5-10698ad415fd)
+
+![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a307812f-4c37-4b10-9e45-cc1feffa492d)
+
+
 
 
 We will apply the same filter with orders where the order status is delivered. We will again use a barplot() function to visualize our graph. 
 
 ``` Python
 
-delivered_orders= order_status_distribution[order_status_distribution['order_status'] == 'delivered']
+delivered_orders = delivered_orders.dropna(subset=['approved_month'])
+delivered_orders['approved_month'] = delivered_orders['approved_month'].astype(int)
 
 plt.figure(figsize=(12, 6))
 sns.barplot(x='approved_month', y='count', data=delivered_orders, color='green', ci=None)
@@ -289,10 +290,9 @@ plt.xticks(fontsize=10)
 plt.yticks(fontsize=10)
 plt.tight_layout()
 plt.show()
-
 ```
-![delivered](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/1de88eb4-c646-4431-9387-bfd709bd2b4a)
 
+![Q1_2](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/5a270ceb-c1c5-4068-a348-64da3202ab77)
 
 
 After we examined the order statuses of the monthly orders, we will now examine the categories that stand out during special occasions such as Valentine's Day. We took days between the first of February and the 13th of February to examine the product categories until Valentine's Day on the 14th of February. 
