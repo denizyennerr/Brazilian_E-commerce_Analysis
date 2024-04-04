@@ -964,95 +964,105 @@ plt.show()
 Based on the analysis of customer segments derived from the query results, the following insights and CRM strategies can be outlined:
 
 **Hibernating (39.82%):*
-
-Customers who made purchases in the past, but infrequently and with low spending.
-CRM Strategy: Send standard communications with offers and relevant product deals to encourage repeat purchases.
+- Customers that have low spending but made infrequent purchases in the past.
+- As a CRM Strategy sending out offers as standard communication and relevant product deals to promote repetitive purchases.
 
 **About to Sleep (19.73%):*
-
-Description: Recent buyers who are unsure about future purchases from the company or competitors.
-CRM Strategy: Run promotional campaigns for a limited time, provide product recommendations based on their behavior, and emphasize the benefits of purchasing from the company.
+- Recent buyers who are hesitant about future purchases from competitors or the company.
+- As a CRM Strategy, provide them with product recommendations based on their behavior, send out promotional campaigns for a limited time, and emphasize the benefits of purchasing from the company.
 
 **Promising (17.03%):*
-
-- Description: Customers who show potential for becoming loyal due to their recent engagement and moderate spending.
-- CRM Strategy: Nurture these customers with personalized recommendations, exclusive offers, and incentives to encourage repeat purchases and loyalty.
+- Customers who can become loyal because of their moderate spending and recent engagement.
+- As a CRM Strategy, capture these customers with exclusive offers, personalized recommendations, and incentives to encourage brand loyalty and repeat purchases.
 
 
 **New Customers (13.83%):*
+- These are recently gained customers who have not yet established long-term engagement with the company.
+- As a CRM Strategy, provide a warm welcome pack with personalized onboarding messages, introductory offers, and guidance on product selection to encourage future interactions and repeat purchases.
 
-- Description: Recently acquired customers who have yet to establish long-term engagement with the company.
-- CRM Strategy: Provide a warm welcome with personalized onboarding messages, introductory offers, and guidance on product selection to encourage future interactions and repeat purchases.
 
 **Potential Loyalist (8.57%):*
-
-Description: Recent buyers with good spending habits and multiple purchases.
-CRM Strategy: Offer a loyalty program, maintain engagement through personalized recommendations, and provide incentives for continued loyalty.
+- They are recent buyers with multiple purchases and good spending habits.
+- As a CRM Strategy, a loyalty program can be offered, and multiple purchases can retain engagement through personalized recommendations.
 
 **Champions (0.48%):*
-
-Description: Top-tier customers with significant spending and loyalty.
-CRM Strategy: Maintain personalized communication, offer exclusive benefits, and provide VIP treatment to reinforce loyalty and advocacy.
+- Top-tier customers with significant spending and loyalty.
+- As a CRM Strategy, sustain personalized communication, promote exclusive benefits, and offer VIP treatment to strengthen advocacy and loyalty.
 
 **Need Attention (0.25%):*
-- Description: Customers who have made recent purchases but exhibit signs of uncertainty or hesitation.
-- CRM Strategy: Reach out to these customers with targeted communications, addressing any concerns or questions they may have, and providing reassurance to encourage continued engagement and loyalty.
+- Customers who have made recent purchases but show signs of hesitation or uncertainty.
+- As a CRM Strategy, reach out to these customers to address any concerns or questions they may have, target communications, and provide securitization to encourage continued engagement and loyalty.
 
 **At Risk (0.18%):*
-
-Description: Customers who used to purchase frequently but have not made recent purchases, indicating potential disengagement.
-CRM Strategy: Reconnect with personalized communications, offer attractive deals, and emphasize the value of continued patronage.
+- These customers possess potential disengagement who used to purchase frequently but have not made recent purchases.
+- As a CRM Strategy, offer attractive deals, reconnect with personalized communications, and emphasize the value of continued patronage.
 
 **Loyal Customers (0.09%):*
-
-Description: High-value customers who make frequent purchases.
-CRM Strategy: Engage in personalized communication, avoid mass mailing of offers, provide tailored product recommendations, and encourage product reviews.
-
+- High-value customers who make frequent purchases.
+- As a CRM Strategy, provide tailored product recommendations, engage in personalized communication, avoid mass mailing of offers, and offer product reviews.
 
 
 
-## Results/Findings
-
+## Results / Findings
 1. Order Count by Days of the Week:
-   - The distribution of orders across different days of the week shows variations, with certain days seeing higher order volumes compared to others.
-   - Further analysis could identify potential factors influencing daily order trends, such as promotional activities, customer behavior patterns, or external factors like holidays.
+- The distribution of orders across different days of the week shows variations, with certain days having higher order volumes in comparison to others.
+- A separate analysis can explain the main factor influencing daily order volumes, including external sources such as promotional campaigns, customer behavior patterns, and holidays.
+
 
 2. Monthly Orders for Delivered Orders:
-   - The visualization illustrates the monthly distribution of delivered orders, providing insights into the volume of orders processed over time.
-   - Peaks and troughs in order volumes may coincide with seasonal trends, marketing campaigns, or other external factors affecting consumer behavior.
+- As can be depicted from the bar chart the distribution of monthly delivery orders is represented and provides insights into the volume of orders processed over time.
+- Peaks and troughs in order volumes may coincide with seasonal trends, as such marketing campaigns or other factors that determine the customer's behavior.
+
 
 3. Top 5 Fastest Delivery Sellers by Average Review Score:
-   - This analysis identifies the top five sellers based on their average delivery times and review scores.
-   - Sellers with fast delivery times and high review scores may enjoy a competitive advantage in attracting and retaining customers.
+- The top five sellers did this research based on their average shipment times and reviews.
+- Amazon transactions are affected by sellers with shorter delivery times and have the advantage of higher review scores, more customer attraction and retention.
+
 
 4. Category-Wise Distribution of Payment Installments:
-   - The analysis reveals the distribution of payment installments across different product categories.
-   - Understanding payment preferences can help optimize payment processing systems and tailor promotional offers to match customer preferences.
+- The analysis shows the distribution of payment installments across different product categories.
+- Understanding payment preferences can help optimize payment processing systems and tailor promotional offers to match customer preferences.
+
 
 5. Top Regions with Highest Number of Installment Payments:
-   - By identifying regions with the highest number of installment payments, businesses can target marketing efforts and tailor product offerings to meet the needs of these regions.
+- Businesses can view their marketing efforts by identifying regions with the highest number of installment payments, according to their customer's needs.
 
-6. **Distribution of Orders Paid in Single and Multiple Installments:**
-   - The analysis compares the distribution of orders paid in single and multiple installments across various product categories.
-   - Insights from this analysis can inform inventory management and pricing strategies to accommodate different payment preferences.
+
+6. Distribution of Other Orders in Single and Multiple Installments:
+- The analysis examines the difference in the distribution of payments between payment orders in a single payment and multiple installments across various product categories.
+- Insights from this analysis can inform inventory management and pricing strategies to accommodate different payment preferences.
+
 
 7. Customer Segmentation Analysis:
-   - Through RFM (Recency, Frequency, Monetary) analysis, customers are segmented into distinct groups based on their transactional behavior.
-   - Customer segments such as "Champions," "Promising," and "New Customers" offer valuable insights for targeted marketing and customer relationship management strategies.
+- Through RFM (Recency, Frequency, Monetary) analysis customers are divided into distinct groups, depending on their transactional behavior.
+- Customer groups like "Champion," "Promising" and "New Customers" offer valuable insights to marketing and sales departments for targeted marketing and customer relationship management strategies.
+
 
 8. Customer Segmentation Results:
-   - The segmentation analysis categorizes customers into distinct groups based on their RFM scores and behavioral patterns.
-   - Each customer segment requires tailored marketing and retention strategies to maximize engagement and drive profitability.
+- The segmentation analysis segments the customers into different groups based on their RFM score and their behavioral patterns which help to get a better understanding of the most loyal customers are for the company along with the retention rate of the lost customers.
+- On every customer segment we process an individual marketing and retaining tactic that should aim at gaining customer engagement and profitability.
 
-These findings provide valuable insights for decision-making across various aspects of e-commerce operations, including marketing, customer service, logistics, and product management. Further exploration and refinement of these insights can lead to improved customer satisfaction, retention, and overall business performance.
+
+These findings provide valuable insights for decision-making across various aspects of e-commerce operations, ranging from marketing to service, logistics as well as product management. Further exploration and refinement of these insights can lead to ameliorated customer satisfaction, increased customer retention, and improved business success.
+
+
+## Recommendations
+- Furthermore, RFM analysis is used to statistically evaluate the profitability of individual segments over a long period. On top of the RFM analysis, a customer lifetime value can be used to measure the long-term profitability of different customer segments. Therefore, marketers can better understand and shape their customer segmentation strategies and prioritize marketing endeavors to capture their target market accordingly.
+
+
+### Limitations
+- The digital business market in Brazil is an incredibly vital and dynamic industry. The market is influenced by various factors such as regulatory changes, technological innovations,  and competitiveness. There may be some changes in the past that could not cover these dynamic shifts completely.
+- In this way, the dataset emphasizes the transactions inside the Olist platform instead of the market as a whole about e-commerce Brazil. It might need to include additional data from various platforms to identify the competitive dynamics or market share.
 
 
 ## Recommendations
 - On top of the RFM analysis, a customer lifetime value can be calculated to assess the long-term profitability of different customer segments. Therefore, marketers can better understand which customer segments contribute the most to revenue and prioritize marketing efforts to the target market accordingly.
 
+
 ### Limitations
 - The e-commerce landscape in Brazil is constantly evolving, influenced by factors such as technology advancements, regulatory changes, and competitive pressures. Historical data may not fully capture these dynamic shifts.
 - The dataset primarily focuses on transactions within the Olist platform, limiting insights into the broader e-commerce ecosystem in Brazil. Understanding competitive dynamics or market share may require data from multiple platforms.
+
   
 ### References
 
