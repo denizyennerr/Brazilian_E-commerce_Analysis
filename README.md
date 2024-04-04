@@ -464,12 +464,9 @@ plt.title('City-wise Top Orders')
 plt.xlabel('Customer City')
 plt.ylabel('Order Count')
 ```
-![top_orders_per_city](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/5b3d438b-ad0d-4511-9eb6-7db06939300d)
-
 We will again employ a barplot() function from the Seaborn to visualize the list of cities and the count of customer orders in each city. 
 
-
-
+![top_orders_per_city](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/5b3d438b-ad0d-4511-9eb6-7db06939300d)
 
 Here is the number of orders per city:
 
