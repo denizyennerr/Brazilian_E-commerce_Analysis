@@ -264,12 +264,12 @@ plt.bar(unavailable_or_cancelled_orders['approved_month'], unavailable_or_cancel
 plt.xticks(months, rotation=0, fontsize=10)
 plt.title('Monthly Friction of Unavailable or Cancelled Orders')
 plt.xlabel('Approved Month')
-plt.ylabel('Frequency')
+plt.ylabel('Number of Orders')
 plt.tight_layout()
 plt.show()
 ```
 
-![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a307812f-4c37-4b10-9e45-cc1feffa492d)
+![Q1](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/9d0f34a3-f381-4061-993f-3105067674eb)
 
 
 
