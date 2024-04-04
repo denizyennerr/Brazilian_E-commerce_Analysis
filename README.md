@@ -387,35 +387,25 @@ days_of_the_month_order_count_cleaned= days_of_the_month_order_count.dropna()
 print(days_of_the_month_order_count_cleaned)
 ```
 
-The bar plot displays the distribution of order count across different days of the month. Each bar represents the number of orders received on a specific day of the month. 
-From the visualization, we can observe some patterns:
-- There is some variation in the number of orders throughout the month, with certain days having higher order counts than others.
-- Some days show peaks in order counts, indicating periods of increased sales activity.
-- Other days exhibit lower order counts, suggesting quieter periods in terms of order placements.
-- Overall, there seems to be some variability in order volumes across different days of the month, which could be influenced by factors such as promotions, seasonality, or customer behavior. 
-
-Further analysis could be conducted to identify any underlying trends or patterns driving these fluctuations in order counts on different days of the month.
-
 ``` Python
 plt.figure(figsize=(15, 8))
 sns.lineplot(x='days_of_the_month', y='order_count', data=days_of_the_month_order_count_cleaned, ci=None, marker='o', markersize=8) 
 plt.title('Order Count by Days of the Month')
 plt.xlabel('Days of the Month ')
 plt.ylabel('Number of Orders')
+plt.xticks(days_of_the_month_order_count_cleaned['days_of_the_month'])
 plt.show()
-
 ```
+The line chart below displays the distribution of order counts across different days of the month. Each bar represents the number of orders received on a specific day of the month. 
+
+![order_days_monthly](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/5971152e-21be-4176-be77-dbccd3a7fd61)
 
 
-
-
-
-
-
-
-
-
-
+From the visualization, we can observe some patterns:
+- There is some variation in the number of orders throughout the month, with the 3rd, 4th, 5th, and 16th days of the month having higher order counts than others.
+- The 24th and 25th days peak in order counts, indicating days of increased sales activity.
+- The last day of the month exhibits the lowest order count, suggesting no or closer to zero order placement.
+- Overall, there seems to be some variability in order volumes across different days of the month, which could be influenced by factors such as promotions, seasonality, or customer behavior. Further analysis could be conducted to identify any underlying trends or patterns driving these fluctuations in order counts on different days of the month.
 
 
 Next, we will delve deeper into customer analysis by identifying the cities with the highest number of shoppers.
@@ -464,7 +454,24 @@ ORDER BY
     COUNT(o.order_id) DESC;
 ```
 
-The output of the query provides a list of cities along with the count of orders placed by customers residing in each city. Here is the number of orders per city:
+```Python
+Top_orders_per_city= pd.read_csv(r"C:\Users\ASUS\Desktop\top_orders_per_city.csv")
+Top_orders_per_city
+
+plt.figure(figsize=(20,8))
+sns.barplot(x='customer_city', y='count', data=Top_orders_per_city)
+plt.title('City-wise Top Orders')
+plt.xlabel('Customer City')
+plt.ylabel('Order Count')
+```
+![top_orders_per_city](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/5b3d438b-ad0d-4511-9eb6-7db06939300d)
+
+We will again employ a barplot() function from the Seaborn to visualize the list of cities and the count of customer orders in each city. 
+
+
+
+
+Here is the number of orders per city:
 
 Sao Paulo: 15,540 orders
 Rio de Janeiro: 6,882 orders
@@ -479,19 +486,6 @@ Sao Bernardo do Campo: 938 orders
 
 This indicates that Sao Paulo has the highest number of orders, followed by Rio de Janeiro, Belo Horizonte, and other cities in descending order of order count.
 
-Now, we will again use Python to visualize this output. We will again employ a barplot() function from the Seaborn.
-
-```Python
-Top_orders_per_city= pd.read_csv(r"C:\Users\ASUS\Desktop\top_orders_per_city.csv")
-Top_orders_per_city
-
-plt.figure(figsize=(20,8))
-sns.barplot(x='customer_city', y='count', data=Top_orders_per_city)
-plt.title('City-wise Top Orders')
-plt.xlabel('Customer City')
-plt.ylabel('Order Count')
-```	
-![top_orders_per_city](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/33a1372a-a868-46a6-ad25-051bce25f928)
 
 With the following query, we will be able to identify sellers who have a track record of delivering orders quickly while maintaining satisfactory average review scores from customers.
 
