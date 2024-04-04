@@ -484,7 +484,7 @@ Sao Bernardo do Campo: 938 orders
 This indicates that Sao Paulo has the highest number of orders, followed by Rio de Janeiro, Belo Horizonte, and other cities in descending order of order count.
 
 
-With the following query, we will be able to identify sellers who have a track record of delivering orders quickly while maintaining satisfactory average review scores from customers.
+Next, with the following query, we will be able to identify sellers who have a track record of delivering orders quickly while maintaining satisfactory average review scores from customers.
 
 ``` SQL
 WITH fastest_delivered_products AS (
@@ -529,7 +529,7 @@ plt.xlabel('Customer State')
 plt.ylabel('Payment Installments')
 plt.show()
 ```
-
+![fastest_delivery_sellers](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/38853868-0467-48af-8c5e-780f667244d0)
 
 
 Now we will also plot the top 5 fastest delivery sellers by their average review scores.
@@ -545,6 +545,7 @@ plt.ylabel('Average Review Score')
 plt.xticks(rotation=45)
 plt.show()
 ```
+![review_score](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/cad49049-184d-4186-b678-c542570e1382)
 
 
 Next, we will check the number of categories each seller sells their products in and their corresponding order counts. 
@@ -598,11 +599,14 @@ plt.title('Maximum Category Wise Product Sellers')
 plt.xlabel('Number of Category')
 plt.ylabel('Number of Products')
 ```
+
+![max_category_sellers](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a1b1f92b-c72c-4386-b4f5-8300b55d0014)
+
+
 The graph indicates that there is no observable correlation between the number of product categories offered by a seller and the quantity of orders they receive.
 
-![category_count_orders](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/365599ff-eb4b-45b5-893a-ee04b991df5f)
 
-Next, we will conduct a customer analysis.
+Now, we will conduct a customer analysis.
 We will start with plotting the regions where users with the highest number of installment payments reside.
 
 ```SQL
@@ -626,6 +630,7 @@ Select customer_state,
 		order by 2 desc;
 ```
 We will again visualize our query by barplot() function from the Seaborn library.
+
 ```Python
 highest_number_of_installment_payments_reside= pd.read_csv(r"C:\Users\ASUS\Desktop\highest_number_of_installment_payments_reside.csv")
 highest_number_of_installment_payments_reside
@@ -637,7 +642,8 @@ plt.xlabel('Customer State')
 plt.ylabel('Payment Installments')
 plt.show()
 ```
-![highest_number_of_installment_payments_reside](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/c00acf76-f394-47d1-bf59-119bdf06b719)
+![payment_installments_per_state](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/7d328905-deda-4cda-b25a-b2895687596e)
+
 
 This output represents the count of users residing in different regions where users with the highest number of installment payments reside. Each region code is followed by the count of users. For instance, "SP" indicates the São Paulo region with 10 users have the highest number of installment payments. Similarly, "RJ" represents Rio de Janeiro with 8 users, "MG" represents Minas Gerais with 6 users, and so on.
 
@@ -665,7 +671,8 @@ plt.xlabel('Payment Method')
 plt.ylabel('Number of Successful Orders')
 plt.show()
 ```
-![payment_type](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/fbb66618-c876-43ff-98f5-c7d6bfdfffe5)
+
+![total_Succesfull_payment_method](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/72073617-b50d-473d-905a-6810fdd24474)
 
 We can see that  the payment methods used by customers along with the corresponding order count and total successful payment amount. 
 
@@ -706,7 +713,23 @@ ORDER BY
     order_count DESC,
     product_category_name DESC; 
 ```
-The following data indicates the distribution of orders paid in single-payment installments across different product categories. 
+```Python
+single_payment_installments=pd.read_csv(r"C:\Users\ASUS\Desktop\single_installment.csv")
+single_payment_installments
+
+plt.figure(figsize=(16, 8))
+sns.barplot(x='order_count', y='product_category_name', data=single_payment_installments, palette='viridis', orient='h')
+plt.title('Analyzing Category-Wise Single Installment Payments')
+plt.xlabel('Count of Orders')
+plt.ylabel('Product Category')
+plt.show()
+```
+
+![single_installment_payment](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/f70e7bd1-76aa-4003-8f4e-3c2dd014a9e6)
+
+
+
+This graph indicates the distribution of orders paid in single-payment installments across different product categories. 
 
 - "esporte_lazer": The category of "Sports and Leisure" has the highest number of orders paid in a single payment installment, with 4,299 orders.
 - "informatica_acessorios": Following closely, the "Computers and Accessories" category accounts for 4,177 orders.
@@ -714,19 +737,9 @@ The following data indicates the distribution of orders paid in single-payment i
 - "cama_mesa_banho": The category of "Bed, Bath, and Table" follows with 3,535 orders.
 - "moveis_decoracao": Lastly, the "Furniture and Decoration" category has 3,152 orders paid in a single payment installment.
 
-![single_installments](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/a3ce43bb-c31d-4188-acb3-7f7e6f6f7456)
 
-```Python
-single_payment_installments=pd.read_csv(r"C:\Users\ASUS\Desktop\single_installment.csv")
-single_payment_installments
 
-plt.figure(figsize=(16, 8))
-sns.barplot(x='order_count', y='product_category_name', data=single_payment_installments, palette='viridis', orient='h')
-plt.title('Analyzing Category-Wise Number of Payment Installments')
-plt.xlabel('Count of Orders')
-plt.ylabel('Product Category')
-plt.show()
-```
+
 
 Query for orders paid in multiple installments:
 ```SQL
@@ -771,21 +784,14 @@ multiple_payment_installments
 
 plt.figure(figsize=(16, 8))
 sns.barplot(x='order_count',y='product_category_name' ,data=multiple_payment_installments, palette='GnBu_d', orient='h')
-plt.title('Analyzing Category-Wise Number of Payment Installments')
+plt.title('Analyzing Category-Wise Multiple Installment Payments')
 plt.xlabel('Count of Orders')
 plt.ylabel('Product Category')
 plt.xticks(rotation=0)
 plt.show()
 ```
 
-
-
-
-
-
-
-
-
+![multiple_payment_installment](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/90dd0db0-c537-4dd2-8e17-ca15dd4f9a9e)
 
 
 
@@ -933,22 +939,27 @@ SELECT
 FROM final_scores 
 ORDER BY 2 desc;
 ```
+
 We will visualize our query using the barplot() function from the Seaborn Library.
+
 ```Python
 RFM_Analysis= pd.read_csv(r"C:\Users\ASUS\Desktop\RFM.csv")
 RFM_Analysis
 
 plt.figure(figsize=(10, 5))
-percentage = (RFM_Analysis['customer_segmentation'].value_counts(normalize=True) * 100).reset_index(name='percentage')
-g = sns.barplot(x=percentage['percentage'], y=percentage['index'], data=percentage, palette="viridis")
+percentage = (RFM_Analysis['customer_segmentation'].value_counts(normalize=True) * 100).reset_index(name='Percentage')
+g = sns.barplot(x=percentage['Percentage'], y=percentage['index'], data=percentage, palette="viridis")
 sns.despine(bottom=True, left=True)
-for i, v in enumerate(percentage['percentage']):
+for i, v in enumerate(percentage['Percentage']):
     g.text(v, i + 0.20, "  {:.2f}".format(v) + "%", color='black', ha="left")
 g.set_ylabel('Segmentation')
 g.set(xticks=[])
 plt.show()
 ```
-![RFM](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/d5260871-b1ed-4f88-8562-6818c11b5aa8)
+
+![RFM](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/acecce93-fc18-42bd-bd24-3b65a12daf9f)
+
+
 
 Based on the analysis of customer segments derived from the query results, the following insights and CRM strategies can be outlined:
 
