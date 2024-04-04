@@ -1048,7 +1048,7 @@ These findings provide valuable insights for decision-making across various aspe
 
 
 ## Recommendations
--On top of the RFM analysis, a customer lifetime value can be calculated to assess the long-term profitability of different customer segments. Therefore, marketers can better understand which customer segments contribute the most to revenue and prioritize marketing efforts to the target market accordingly.
+- On top of the RFM analysis, a customer lifetime value can be calculated to assess the long-term profitability of different customer segments. Therefore, marketers can better understand which customer segments contribute the most to revenue and prioritize marketing efforts to the target market accordingly.
 
 ### Limitations
 - The e-commerce landscape in Brazil is constantly evolving, influenced by factors such as technology advancements, regulatory changes, and competitive pressures. Historical data may not fully capture these dynamic shifts.
