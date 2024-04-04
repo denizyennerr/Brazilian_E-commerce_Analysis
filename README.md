@@ -516,22 +516,20 @@ ORDER BY
     avg_delivery_time
 LIMIT 5;
 ```
-We plot for the top 5 fastest delivery sellers by their order count.
+We plot with a bar chart for the top 5 fastest delivery sellers by their order count.
 
 ```Python
 fastest_delivery_sellers= pd.read_csv(r"C:\Users\ASUS\Desktop\fastest_delivery_sellers.csv")
 fastest_delivery_sellers
 
-plt.figure(figsize=(16, 7))
-sns.barplot(x='seller_id', y='order_count', data=fastest_delivery_sellers, palette='viridis', ci=None)
-plt.title('Top 5 Fastest Delivery Sellers by Order Count')
-plt.xlabel('Seller ID')
-plt.ylabel('Order Count')
-plt.xticks(rotation=45)
+plt.figure(figsize=(15, 8))
+sns.catplot(x='customer_state', y='count', data=highest_number_of_installment_payments_reside, kind='bar', aspect=2)
+plt.title('Analyzing Number of Payment Installments Per State')
+plt.xlabel('Customer State')
+plt.ylabel('Payment Installments')
 plt.show()
 ```
 
-![fastest_sellers_by_ordercount](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/7c8a2965-3f1d-4e79-9426-c9e5b0861383)
 
 
 Now we will also plot the top 5 fastest delivery sellers by their average review scores.
@@ -547,7 +545,6 @@ plt.ylabel('Average Review Score')
 plt.xticks(rotation=45)
 plt.show()
 ```
-![average_review_score](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/4f0f993b-07c6-44ee-8ebf-8fac209854d2)
 
 
 Next, we will check the number of categories each seller sells their products in and their corresponding order counts. 
@@ -724,11 +721,10 @@ single_payment_installments=pd.read_csv(r"C:\Users\ASUS\Desktop\single_installme
 single_payment_installments
 
 plt.figure(figsize=(16, 8))
-sns.barplot(x='product_category_name', y='order_count', data=single_payment_installments, palette='viridis')
+sns.barplot(x='order_count', y='product_category_name', data=single_payment_installments, palette='viridis', orient='h')
 plt.title('Analyzing Category-Wise Number of Payment Installments')
-plt.xlabel('Product Category')
-plt.ylabel('Count of Payment Installments')
-plt.xticks(rotation=90)
+plt.xlabel('Count of Orders')
+plt.ylabel('Product Category')
 plt.show()
 ```
 
@@ -774,14 +770,24 @@ multiple_payment_installments= pd.read_csv(r"C:\Users\ASUS\Desktop\multiple_inst
 multiple_payment_installments
 
 plt.figure(figsize=(16, 8))
-sns.barplot(x='product_category_name', y='order_count', data=multiple_payment_installments, palette='GnBu_d')
+sns.barplot(x='order_count',y='product_category_name' ,data=multiple_payment_installments, palette='GnBu_d', orient='h')
 plt.title('Analyzing Category-Wise Number of Payment Installments')
-plt.xlabel('Product Category')
-plt.ylabel('Count of Payment Installments')
-plt.xticks(rotation=90)
+plt.xlabel('Count of Orders')
+plt.ylabel('Product Category')
+plt.xticks(rotation=0)
 plt.show()
 ```
-![multiple_installments](https://github.com/denizyennerr/Brazilian_E-commerce_Analysis/assets/160275199/ff9550da-b638-44f4-b2f9-62fc50458c2f)
+
+
+
+
+
+
+
+
+
+
+
 
 Lastly, we will conduct the RFM (Recency, Frequency, Monetary) analysis and analyze customer behavior, and segment them into different categories based on recency, frequency, and monetary value. The segmentation can help in targeting specific customer groups with tailored marketing strategies.
 
