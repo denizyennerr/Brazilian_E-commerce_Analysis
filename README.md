@@ -1046,22 +1046,13 @@ Based on the analysis of customer segments derived from the query results, the f
 These findings provide valuable insights for decision-making across various aspects of e-commerce operations, ranging from marketing to service, logistics as well as product management. Further exploration and refinement of these insights can lead to ameliorated customer satisfaction, increased customer retention, and improved business success.
 
 
-## Recommendations
-- Furthermore, RFM analysis is used to statistically evaluate the profitability of individual segments over a long period. On top of the RFM analysis, a customer lifetime value can be used to measure the long-term profitability of different customer segments. Therefore, marketers can better understand and shape their customer segmentation strategies and prioritize marketing endeavors to capture their target market accordingly.
-
-
 ### Limitations
 - The digital business market in Brazil is an incredibly vital and dynamic industry. The market is influenced by various factors such as regulatory changes, technological innovations,  and competitiveness. There may be some changes in the past that could not cover these dynamic shifts completely.
 - In this way, the dataset emphasizes the transactions inside the Olist platform instead of the market as a whole about e-commerce Brazil. It might need to include additional data from various platforms to identify the competitive dynamics or market share.
 
 
 ## Recommendations
-- On top of the RFM analysis, a customer lifetime value can be calculated to assess the long-term profitability of different customer segments. Therefore, marketers can better understand which customer segments contribute the most to revenue and prioritize marketing efforts to the target market accordingly.
-
-
-### Limitations
-- The e-commerce landscape in Brazil is constantly evolving, influenced by factors such as technology advancements, regulatory changes, and competitive pressures. Historical data may not fully capture these dynamic shifts.
-- The dataset primarily focuses on transactions within the Olist platform, limiting insights into the broader e-commerce ecosystem in Brazil. Understanding competitive dynamics or market share may require data from multiple platforms.
+- Furthermore, RFM analysis is used to statistically evaluate the profitability of individual segments over a long period. On top of the RFM analysis, a customer lifetime value can be used to measure the long-term profitability of different customer segments. Therefore, marketers can better understand and shape their customer segmentation strategies and prioritize marketing endeavors to capture their target market accordingly.
 
   
 ### References
