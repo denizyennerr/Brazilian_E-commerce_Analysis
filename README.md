@@ -590,7 +590,7 @@ LIMIT 10;
 We will again visualize the query by barplot() function from the Seaborn library.
 
 ```Python
-category_counts_sellers= pd.read_csv(r"C:\Users\ASUS\Desktop\category_counts_sellers.csv")
+category_counts_sellers= pd.read_csv(r"...\category_counts_sellers.csv")
 category_counts_sellers
 
 plt.figure(figsize=(15,8))
@@ -632,7 +632,7 @@ Select customer_state,
 We will again visualize our query by barplot() function from the Seaborn library.
 
 ```Python
-highest_number_of_installment_payments_reside= pd.read_csv(r"C:\Users\ASUS\Desktop\highest_number_of_installment_payments_reside.csv")
+highest_number_of_installment_payments_reside= pd.read_csv(r"...\highest_number_of_installment_payments_reside.csv")
 highest_number_of_installment_payments_reside
 
 plt.figure(figsize=(15,8))
