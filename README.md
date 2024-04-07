@@ -360,7 +360,7 @@ order by approved_day , days_of_the_month
 After importing our CSV file into Jupyter Notebook, we can proceed with visualizing our data. Depending on the nature of our analysis, we will utilize various visualization libraries such as Matplotlib, Seaborn, or Plotly.
 
 ``` Python
-days_order_count = pd.read_csv(r"...\Desktop\days_order_count.csv")
+days_order_count = pd.read_csv(r"C:...\Desktop\days_order_count.csv")
 days_order_count
 ```
 
@@ -590,7 +590,7 @@ LIMIT 10;
 We will again visualize the query by barplot() function from the Seaborn library.
 
 ```Python
-category_counts_sellers= pd.read_csv(r"...\category_counts_sellers.csv")
+category_counts_sellers= pd.read_csv(r"C:...\category_counts_sellers.csv")
 category_counts_sellers
 
 plt.figure(figsize=(15,8))
@@ -632,7 +632,7 @@ Select customer_state,
 We will again visualize our query by barplot() function from the Seaborn library.
 
 ```Python
-highest_number_of_installment_payments_reside= pd.read_csv(r"...\highest_number_of_installment_payments_reside.csv")
+highest_number_of_installment_payments_reside= pd.read_csv(r"C:...\highest_number_of_installment_payments_reside.csv")
 highest_number_of_installment_payments_reside
 
 plt.figure(figsize=(15,8))
@@ -779,7 +779,7 @@ The following graph shows the distribution of orders paid in multiple payment in
 - "moveis_decoracao": Lastly, the "Furniture and Decoration" category has 3,353 orders paid in multiple installments.
 
 ```Python
-multiple_payment_installments= pd.read_csv(r"...\Desktop\multiple_installments.csv")
+multiple_payment_installments= pd.read_csv(r"C:...\Desktop\multiple_installments.csv")
 multiple_payment_installments
 
 plt.figure(figsize=(16, 8))
