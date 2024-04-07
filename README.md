@@ -226,7 +226,7 @@ With the help of Matplotlib alongside the Seaborn library, we employ the barplot
 Then we import our CSV file to our Jupyter Notebook. Afterward, we remove any rows containing missing values (NaN values). This step ensures data cleanliness and prevents potential issues during analysis.
 
 ``` Python
-monthly_order_data= pd.read_csv(r"C:\Users\ASUS\Desktop\monthly_order.csv")
+monthly_order_data= pd.read_csv(r"C:...\monthly_order.csv")
 monthly_order_data.dropna(inplace=True)
 monthly_order_data.approved_month=monthly_order_data.approved_month.astype(int)
 ```
@@ -322,7 +322,7 @@ limit 15
 Once we imported our CSV file to our Jupyter Notebook, we used a barplot() to visualize the top categories that were popular during Valentine's Day shopping period.
 
 ``` Python
-product_category_valentines_day= pd.read_csv(r"C:\Users\ASUS\Desktop\product_category_valentines_day.csv")
+product_category_valentines_day= pd.read_csv(r"C:...\Desktop\product_category_valentines_day.csv")
 product_category_valentines_day
 
 plt.figure(figsize=(12, 8))
@@ -360,7 +360,7 @@ order by approved_day , days_of_the_month
 After importing our CSV file into Jupyter Notebook, we can proceed with visualizing our data. Depending on the nature of our analysis, we will utilize various visualization libraries such as Matplotlib, Seaborn, or Plotly.
 
 ``` Python
-days_order_count = pd.read_csv(r"C:\Users\ASUS\Desktop\days_order_count.csv")
+days_order_count = pd.read_csv(r"...\Desktop\days_order_count.csv")
 days_order_count
 ```
 
@@ -381,7 +381,7 @@ plt.show()
 Before creating visualizations for the days of the month order count, we needed to perform data preprocessing tasks. As such as cleaning the data to make it suitable for visualization.
 
 ``` Python
-days_of_the_month_order_count= pd.read_csv(r"C:\Users\ASUS\Desktop\days_of_the_month_ordercount.csv")
+days_of_the_month_order_count= pd.read_csv(r"C:...\Desktop\days_of_the_month_ordercount.csv")
 
 days_of_the_month_order_count_cleaned= days_of_the_month_order_count.dropna()
 print(days_of_the_month_order_count_cleaned)
@@ -455,7 +455,7 @@ ORDER BY
 ```
 
 ```Python
-Top_orders_per_city= pd.read_csv(r"C:\Users\ASUS\Desktop\top_orders_per_city.csv")
+Top_orders_per_city= pd.read_csv(r"C:...\Desktop\top_orders_per_city.csv")
 Top_orders_per_city
 
 plt.figure(figsize=(20,8))
@@ -519,7 +519,7 @@ LIMIT 5;
 We plot with a bar chart for the top 5 fastest delivery sellers by their order count.
 
 ```Python
-fastest_delivery_sellers= pd.read_csv(r"C:\Users\ASUS\Desktop\fastest_delivery_sellers.csv")
+fastest_delivery_sellers= pd.read_csv(r"C:...\Desktop\fastest_delivery_sellers.csv")
 fastest_delivery_sellers
 
 plt.figure(figsize=(15, 8))
@@ -661,7 +661,7 @@ order by op.payment_type desc
 
 We will again visualize our query by barplot() function from the Seaborn library.
 ```Python
-payment_type= pd.read_csv(r"C:\Users\ASUS\Desktop\payment_type_segmentatiton.csv")
+payment_type= pd.read_csv(r"C:...\Desktop\payment_type_segmentatiton.csv")
 payment_type
 
 plt.figure(figsize=(15,8))
@@ -714,7 +714,7 @@ ORDER BY
     product_category_name DESC; 
 ```
 ```Python
-single_payment_installments=pd.read_csv(r"C:\Users\ASUS\Desktop\single_installment.csv")
+single_payment_installments=pd.read_csv(r"C:...\Desktop\single_installment.csv")
 single_payment_installments
 
 plt.figure(figsize=(16, 8))
@@ -779,7 +779,7 @@ The following graph shows the distribution of orders paid in multiple payment in
 - "moveis_decoracao": Lastly, the "Furniture and Decoration" category has 3,353 orders paid in multiple installments.
 
 ```Python
-multiple_payment_installments= pd.read_csv(r"C:\Users\ASUS\Desktop\multiple_installments.csv")
+multiple_payment_installments= pd.read_csv(r"...\Desktop\multiple_installments.csv")
 multiple_payment_installments
 
 plt.figure(figsize=(16, 8))
@@ -943,7 +943,7 @@ ORDER BY 2 desc;
 We will visualize our query using the barplot() function from the Seaborn Library.
 
 ```Python
-RFM_Analysis= pd.read_csv(r"C:\Users\ASUS\Desktop\RFM.csv")
+RFM_Analysis= pd.read_csv(r"C...\Desktop\RFM.csv")
 RFM_Analysis
 
 plt.figure(figsize=(10, 5))
